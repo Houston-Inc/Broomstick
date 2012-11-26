@@ -1,0 +1,68 @@
+define([
+    'jquery',
+    'backbone',
+    'features/baseFeature',
+    'features/featureContainer'
+], function($, Backbone, BaseFeature, FeatureContainer, undefined) {
+    "use strict";
+
+    // Sample Feature
+    // ---------------
+
+    var SampleFeature = BaseFeature.extend({
+
+        name: 'SampleFeature',
+        uiName: 'Sample',
+        element: 'li#SampleFeature',
+
+        globalEvents: {
+            'navigation.activeFeatureSet': 'activated'
+        },
+        routes: {
+            'sample': 'render'
+        },
+
+        initialize: function() {
+            var self = this;
+
+            self.initializeSubscriptions();
+
+            self.features = new FeatureContainer();
+
+            self.loaded = $.Deferred();
+
+            self.when(self.templatesResolved(),function() {
+
+                var Section = self.getFeature('SectionFeature'),
+                    section = new Section("sample-section", self.element, true);
+
+                self.section = section;
+                self.registerFeature(section);
+
+                self.$template = self.getTemplate(self.element);
+                self.resolve(true);
+            });
+
+            self.publish('router.registerRoutes', self);
+            self.publish('moduleInitialized', self);
+        },
+
+        render: function() {
+            var self = this;
+
+            /*if(!self.isRendered()) {
+                self.setElement(self.element);
+                self.$el.append(self.$template);
+                self.setRendered(true);
+            }*/
+        },
+
+        activated: function(featureActivated) {
+            BaseFeature.prototype.featureActivated.call(this, featureActivated);
+        }
+
+    });
+
+    return SampleFeature;
+
+});

@@ -1,0 +1,29 @@
+div#broomstick > footer {
+    nav {
+        margin-right: 1em;
+        padding-top: 1em;
+        height: 5em;
+        li.feature {
+            margin-top: -0.5em;
+            .transition(all 0.4s linear);
+            &:before {
+                content: '';
+                position: relative;
+                display: block;
+                opacity: 0;
+                width: 0;
+                height: 0;
+                top: -1em;
+                left: 50%;
+                margin-left: -0.5em;
+                border-left: 0.5em solid transparent;
+                border-right: 0.5em solid transparent;
+                border-top: 0.5em solid white;
+            }
+            &.active:before {
+                top: -0.5em;
+                opacity: 1;
+            }
+        }
+    }
+}

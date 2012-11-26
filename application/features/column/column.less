@@ -1,0 +1,57 @@
+ul#columns {
+    display: block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    white-space: nowrap;
+    width: 100%;
+    height: 100%;
+    .transition(all 0.5s);
+    .backface-visibility(hidden);
+    vertical-align: top;
+    li {
+        vertical-align: top;
+        display: inline-block;
+        .ie7-inline-block();
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        padding: 1em;
+        .box-sizing(border-box);
+        *behavior: url(/lib/boxsizing.htc);
+        table {
+            background-color: white;
+        }
+    }
+
+    &.column2 {
+        margin-left: -100%;
+    }
+    &.column3 {
+        margin-left: -200%;
+    }
+    &.column4 {
+        margin-left: -300%;
+    }
+    &.column5 {
+        margin-left: -400%;
+    }
+    &.column6 {
+        margin-left: -500%;
+    }
+    &.column7 {
+        margin-left: -600%;
+    }
+    &.column8 {
+        margin-left: -700%;
+    }
+    &.column9 {
+        margin-left: -800%;
+    }
+    &.column10 {
+        margin-left: -900%;
+    }
+    &.column11 {
+        margin-left: -1000%;
+    }
+}

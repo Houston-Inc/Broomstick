@@ -1,0 +1,44 @@
+/* ul#columns li */
+div.sections {
+    height: 100%;
+    overflow: hidden;
+
+    div.viewport {
+        height: 100%;
+        .transition(all 0.5s);
+
+        &.no-scroll {
+            section {
+                overflow: hidden;
+            }
+        }
+
+        section {
+            position: relative;
+            margin-top: 1em;
+            height: 100%;
+            overflow-y: scroll;
+
+            &.no-scroll {
+                overflow: hidden;
+            }
+
+            &:first-child {
+                margin-top: 0;
+            }
+
+            &#foo-section {
+                background-color: red;
+            }
+
+            &#bar-section {
+                background-color: green;
+            }
+
+            &#baz-section {
+                background-color: blue;
+            }
+
+        }
+    }
+}
