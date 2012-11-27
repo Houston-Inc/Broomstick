@@ -15,8 +15,8 @@ define('features', [
     "features/navigation/navigation",
     "features/router/router",
     "features/router/notFound/notFound",
-    "features/section/section",
     "features/sample/sample",
+    "features/section/section",
     "features/utils/loading/loading",
     "features/utils/toaster/toaster"
 ], function(_) {

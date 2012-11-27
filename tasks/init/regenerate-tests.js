@@ -30,7 +30,7 @@ exports.template = function(grunt, init, done) {
     }
 
     // Reconstruct specs definition
-    files = wrench.readdirSyncRecursive("tests/test/features/");
+    files = loadFiles('tests/test/features/');
 
     files.forEach(function(filename) {
         var extension = filename.substr(-3);
@@ -39,7 +39,7 @@ exports.template = function(grunt, init, done) {
         }
     });
 
-    files = wrench.readdirSyncRecursive("tests/test/tools/");
+    files = loadFiles('tests/test/tools/');
 
     files.forEach(function(filename) {
         var extension = filename.substr(-3);
@@ -48,7 +48,7 @@ exports.template = function(grunt, init, done) {
         }
     });
 
-    files = wrench.readdirSyncRecursive("tests/test/collections/");
+    files = loadFiles('tests/test/collections/');
 
     files.forEach(function(filename) {
         var extension = filename.substr(-3);
@@ -57,7 +57,7 @@ exports.template = function(grunt, init, done) {
         }
     });
 
-    files = wrench.readdirSyncRecursive("tests/test/models/");
+    files = loadFiles('tests/test/models/');
 
     files.forEach(function(filename) {
         var extension = filename.substr(-3);
@@ -73,3 +73,13 @@ exports.template = function(grunt, init, done) {
     // All done!
     done();
 };
+
+function loadFiles(path) {
+    var exist = fs.existsSync(path);
+
+    if(!exist) {
+        return [];
+    }
+
+    return wrench.readdirSyncRecursive(path);
+}

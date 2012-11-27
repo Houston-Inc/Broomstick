@@ -11,7 +11,7 @@ do
 done
 
 SYSWIDE_NPM_DEPS="jamjs grunt"
-LOCAL_NPM_DEPS="wrench node-static http-proxy"
+LOCAL_NPM_DEPS="wrench node-static http-proxy grunt-clean grunt-recess grunt-requirejs grunt-mocha"
 
 echo "Installing system wide dependencies [$SYSWIDE_NPM_DEPS], we need to sudo to do that."
 for DEPENDENCY in $SYSWIDE_NPM_DEPS
@@ -37,4 +37,7 @@ fi
 rm ~/.grunt/tasks
 ln -s `pwd`/tasks ~/.grunt/tasks
 
-#ln -s ~/node_modules node_modules
+ln -s ~/node_modules node_modules
+
+cd node_modules
+git clone git://github.com/Houston-Inc/grunt-bunyip.git

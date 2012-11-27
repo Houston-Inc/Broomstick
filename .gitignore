@@ -1,0 +1,4 @@
+## Ignore
+.DS_Store
+application/jam
+node_modules

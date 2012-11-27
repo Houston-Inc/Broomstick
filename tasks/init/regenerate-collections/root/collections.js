@@ -3,7 +3,7 @@
  */
 define("collections", [
     'underscore',
-    "collections/aggregations"
+    {%=collections%}
 ], function(_) {
     "use strict";
     var key, collections = {};
