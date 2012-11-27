@@ -18,6 +18,14 @@ function install {
     fi
 }
 
+CMDS="npm"
+
+for i in $CMDS
+do
+    # command -v will return >0 when the $i is not found
+    command -v $i >/dev/null && continue || { echo "[$i] : Command not found. Please install node from http://nodejs.org/"; exit 1; }
+done
+
 read -p "Give a name for the new project? : " projectName
 read -p "Give absolute path for the project? : " path
 
@@ -43,13 +51,6 @@ if [ "$confirm" = "yes" ] || [ "$confirm" = "y" ]; then
     currentPath=`pwd`
     echo "Installing node_modules to $currentPath/node_modules"
 
-    CMDS="npm"
-
-    for i in $CMDS
-    do
-        # command -v will return >0 when the $i is not found
-        command -v $i >/dev/null && continue || { echo "[$i] : Command not found."; exit 1; }
-    done
 
     SYSWIDE_NPM_DEPS="jamjs grunt"
     LOCAL_NPM_DEPS="wrench node-static http-proxy grunt-clean grunt-recess grunt-requirejs grunt-mocha"
