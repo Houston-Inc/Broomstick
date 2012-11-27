@@ -21,7 +21,9 @@ exports.template = function(grunt, init, done) {
     var files = init.filesToCopy(),
         modelsDefinition = {},
         models = [],
-        path = 'application/models/';
+        filePath = 'application/models/';
+
+    console.log(path);
 
     for (key in files) {
         if(key === 'models.js') {
@@ -31,7 +33,7 @@ exports.template = function(grunt, init, done) {
     }
 
     // Reconstruct models definition
-    files = wrench.readdirSyncRecursive(path);
+    files = wrench.readdirSyncRecursive(filePath);
 
     files.forEach(function(filename) {
         var extension = filename.substr(-3);
