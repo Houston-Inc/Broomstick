@@ -18,7 +18,7 @@ Start node http-server
 
 Open browser to url.
 
-    http://127.0.0.1:7357/tests/index.html
+    http://127.0.0.1:7357/tests/test.html
 
 ## Running project
 

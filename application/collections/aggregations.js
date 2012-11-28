@@ -6,7 +6,7 @@ define([
     'tools/eventmachine'
 ], function($, Backbone, Aggregation, config, eventMachine) {
     "use strict";
-    console.log(config);
+    
     // Aggregations Collection
     // ---------------
     var Aggregations = Backbone.Collection.extend({

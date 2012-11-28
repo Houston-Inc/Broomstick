@@ -4,10 +4,7 @@
  */
 define('tools', [
     'underscore',
-    "tools/eventmachine",
-    "tools/polyfills",
-    "tools/templatestorage",
-    "tools/urls"
+    {%=tools%}
 ], function(_) {
     "use strict";
 

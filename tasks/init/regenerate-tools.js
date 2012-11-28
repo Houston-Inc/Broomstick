@@ -12,36 +12,36 @@ var path    = require('path'),
     wrench  = require("wrench");
 
 // Basic template description.
-exports.description = 'Reconstructs model definitions for RequireJS';
+exports.description = 'Reconstructs tools for RequireJS';
 
 // The actual init template.
 exports.template = function(grunt, init, done) {
 
     // Files to copy (and process).
     var files = init.filesToCopy(),
-        modelsDefinition = {},
-        models = [],
-        filePath = 'application/models/';
+        toolsDefinition = {},
+        tools = [],
+        filePath = 'application/tools/';
 
     for (key in files) {
-        if(key === 'models.js') {
-            modelsDefinition["application/models.js"] = files[key];
+        if(key === 'tools.js') {
+            toolsDefinition["application/tools.js"] = files[key];
             continue;
         }
     }
 
-    // Reconstruct models definition
+    // Reconstruct tools
     files = loadFiles(filePath);
 
     files.forEach(function(filename) {
         var extension = filename.substr(-3);
         if(extension === '.js') {
-            models.push('"models/' + filename.substr(0, filename.indexOf(extension)) + '"');
+            tools.push('"tools/' + filename.substr(0, filename.indexOf(extension)) + '"');
         }
     });
 
-    init.copyAndProcess(modelsDefinition, {
-        models: models.join(",\n    ")
+    init.copyAndProcess(toolsDefinition, {
+        tools: tools.join(",\n    ")
     });
 
     // All done!
