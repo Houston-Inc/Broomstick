@@ -26,7 +26,6 @@ define([
 
             if(!_.isString(id)) {
                 throw new Error(self.name + ": Constructor expects id (String)");
-                throw new exceptions.FatalError(self.name + ": Constructor expects id (String)");
             }
 
             self.id = id;

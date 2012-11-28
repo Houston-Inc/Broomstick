@@ -7,6 +7,7 @@ define([
     'tools',
     'lib/testtools'
 ], function($, transparency, Backbone, VisibleFeature, FeatureContainer, tools, testtools) {
+    "use strict";
 
     var feature;
 

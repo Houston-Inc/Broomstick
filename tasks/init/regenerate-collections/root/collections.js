@@ -6,13 +6,15 @@ define("collections", [
     {%=collections%}
 ], function(_) {
     "use strict";
-    var key, collections = {};
+    var collections = {};
 
     _.each(arguments, function(value, key, list) {
         if(value !== _ && !value && value.prototype.name) {
             throw new Error('All collections have to have a name!');
         }
-        _ !== value ? collections[value.prototype.name] = value : _.isEmpty();
+        if(_ !== value) {
+            collections[value.prototype.name] = value;
+        }
     });
 
     return {

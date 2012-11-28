@@ -7,12 +7,14 @@ define('features', [
 ], function(_) {
     "use strict";
 
-    var key, features = {}, deferreds = [];
+    var features = {};
     _.each(arguments, function(value, key, list) {
         if(value !== _ && !value && value.prototype.name) {
             throw new Error('All features have to have a name!');
         }
-        _ !== value ? features[value.prototype.name] = value : _.isEmpty();
+        if(_ !== value) {
+            features[value.prototype.name] = value;
+        }
     });
 
     return {

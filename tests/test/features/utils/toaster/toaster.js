@@ -5,6 +5,7 @@ define([
     /*'tools',*/
     'lib/testtools'
 ], function($, transparency, Toaster, /*tools,*/ testtools) {
+    "use strict";
 
     var self = this,
         toaster;

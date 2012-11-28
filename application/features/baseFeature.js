@@ -10,7 +10,7 @@ define([
     "use strict";
 
     /* Stolen from Backbone's extend */
-    var creator = function(){};
+    var Creator = function(){};
 
     var inherits = function(parent, protoProps, staticProps) {
         var child;
@@ -23,11 +23,15 @@ define([
 
         _.extend(child, parent);
 
-        creator.prototype = parent.prototype;
-        child.prototype = new creator();
-        if (protoProps) _.extend(child.prototype, protoProps);
+        Creator.prototype = parent.prototype;
+        child.prototype = new Creator();
+        if (protoProps) {
+            _.extend(child.prototype, protoProps);
+        }
 
-        if (staticProps) _.extend(child, staticProps);
+        if (staticProps) {
+            _.extend(child, staticProps);
+        }
         child.prototype.constructor = child;
 
         child.__super__ = parent.prototype;
@@ -215,11 +219,10 @@ define([
             }
         },
 
-        featureActivated: function featureActivated(featureActivated) {
-            if(featureActivated.feature === this &&
-                ((featureActivated.eventSource &&
-                !featureActivated.eventSource.route) ||
-                !featureActivated.eventSource)) {
+        featureActivated: function featureActivated(eventData) {
+            if(eventData.feature === this &&
+                ((eventData.eventSource && !featureActivated.eventSource.route) ||
+                 !featureActivated.eventSource)) {
                 this.publish('router.navigate', tools.urls.sanitizeToURL(this.uiName));
             }
         }
@@ -227,7 +230,7 @@ define([
 
     function setFeaturesProxy(featuresProxy) {
         BaseFeature.featuresProxy = BaseFeature.prototype.featuresProxy = featuresProxy;
-    };
+    }
 
     BaseFeature.setFeaturesProxy = BaseFeature.prototype.setFeaturesProxy = setFeaturesProxy;
 

@@ -7,13 +7,15 @@ define("models", [
 ], function(_) {
     "use strict";
 
-    var key, models = {};
+    var models = {};
 
     _.each(arguments, function(value, key, list) {
         if(value !== _ && !value && value.prototype.name) {
             throw new Error('All models have to have a name!');
         }
-        _ !== value ? models[value.prototype.name] = value : _.isEmpty();
+        if(_ !== value) {
+            models[value.prototype.name] = value;
+        }
     });
 
     return {
