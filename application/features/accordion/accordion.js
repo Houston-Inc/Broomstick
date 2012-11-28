@@ -1,15 +1,16 @@
 define([
     'jquery',
+    'underscore',
     'backbone',
-    'features/baseFeature',
+    'features/VisibleFeature',
     'features/featureContainer'
-], function($, Backbone, BaseFeature, FeatureContainer, undefined) {
+], function($, _, Backbone, VisibleFeature, FeatureContainer, undefined) {
     "use strict";
 
     // Accordion Feature
     // -----------------
 
-    var AccordionFeature = BaseFeature.extend({
+    var AccordionFeature = VisibleFeature.extend({
 
         name:           'AccordionFeature',
         element:        'div#accordion',
@@ -23,8 +24,9 @@ define([
         initialize: function(id, sectionId) {
             var self = this;
 
-            if(!self._.isString(id)) {
+            if(!_.isString(id)) {
                 throw new Error(self.name + ": Constructor expects id (String)");
+                throw new exceptions.FatalError(self.name + ": Constructor expects id (String)");
             }
 
             self.id = id;

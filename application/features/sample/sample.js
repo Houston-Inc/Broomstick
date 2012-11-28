@@ -1,15 +1,15 @@
 define([
     'jquery',
     'backbone',
-    'features/baseFeature',
+    'features/VisibleFeature',
     'features/featureContainer'
-], function($, Backbone, BaseFeature, FeatureContainer, undefined) {
+], function($, Backbone, VisibleFeature, FeatureContainer, undefined) {
     "use strict";
 
     // Sample Feature
     // ---------------
 
-    var SampleFeature = BaseFeature.extend({
+    var SampleFeature = VisibleFeature.extend({
 
         name: 'SampleFeature',
         uiName: 'Sample',

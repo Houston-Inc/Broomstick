@@ -2,15 +2,15 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'features/baseFeature',
+    'features/VisibleFeature',
     'features/featureContainer'
-], function($, _, Backbone, BaseFeature, FeatureContainer, undefined) {
+], function($, _, Backbone, VisibleFeature, FeatureContainer, undefined) {
     "use strict";
 
     // Navigation Feature
     // _______
 
-    var NavigationFeature = BaseFeature.extend({
+    var NavigationFeature = VisibleFeature.extend({
 
         name: 'NavigationFeature',
         uiName: 'Navigaatio',

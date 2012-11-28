@@ -1,7 +1,7 @@
 define([
     'jquery',
     'transparency',
-    'features/accordion//accordion',
+    'features/accordion/accordion',
     'tools',
     'test-assets',
     'lib/testtools'
@@ -37,40 +37,43 @@ define([
         // DOM tests
 
         describe('#render', function() {
-
             it('should populate template with data', function() {
-
                 var render = function() {
-                        var selector = "div" + this.element + '-content .accordion-inner';
-                        accordion.$template.find(selector).html(this.uiName + ' Content');
-                    },
-                    AreaSelector = testAssets.DummyFeature.extend({
-                        name: "DummyFeature",
-                        uiName: "Aluerajaus",
-                        element: "#area-selector",
+                    var selector = "div" + this.element + '-content .accordion-inner';
+                    accordion.$template.find(selector).html(this.uiName + ' Content');
+                },
+                    ASelector = testAssets.DummyFeature.extend({
+                        name: "ASelector",
+                        uiName: "A selector",
+                        element: "#a-selector",
                         render: render,
                         loaded: $.Deferred().resolve(true)
                     }),
-                    areaSelector = new AreaSelector(),
-                    SegmentSelector = testAssets.DummyFeature.extend({
-                        name: "DummyFeature2",
-                        uiName: "Segmentit",
-                        element: "#segment-selector",
+                    aSelector = new ASelector(),
+                    BSelector = testAssets.DummyFeature.extend({
+                        name: "BSelector",
+                        uiName: "B selector",
+                        element: "#b-selector",
                         render: render,
                         loaded: $.Deferred().resolve(true)
                     }),
-                    segmentSelector = new SegmentSelector(),
-                    selector = '.accordion-toggle[href="' + areaSelector.element + '-content"]';
+                    bSelector = new BSelector(),
+                    selector = '.accordion-toggle[href="' + aSelector.element + '-content"]';
 
-                accordion.registerFeature(areaSelector);
-                accordion.registerFeature(segmentSelector);
+                var features = {
+                    'ASelector': ASelector,
+                    'BSelector': BSelector
+                };
+                accordion.setFeaturesProxy(features);
+                accordion.registerFeature(aSelector);
+                accordion.registerFeature(bSelector);
 
                 accordion.setRendered(true);
                 accordion.render();
 
                 $("div#testdata").append(accordion.$template);
 
-                expect($("div#testdata").find(selector).first().text()).to.be(areaSelector.uiName);
+                expect($("div#testdata").find(selector).first().text()).to.be(aSelector.uiName);
 
             });
 

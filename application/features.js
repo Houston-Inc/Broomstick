@@ -8,6 +8,7 @@ define('features', [
     "features/baseFeature",
     "features/featureContainer",
     "features/viewportController",
+    "features/VisibleFeature",
     "features/windowEventDispatcher",
     "features/accordion/accordion",
     "features/column/column",
@@ -25,13 +26,13 @@ define('features', [
     var key, features = {}, deferreds = [];
     _.each(arguments, function(value, key, list) {
         if(!!list[key].prototype.name) {
-            features[list[key].prototype.name] = list[key];
+            features[list[key].prototype.name] = value;
         }
     });
 
     return {
         get: function(feature) {
-            if(feature in features) {
+            if(_.has(features, feature)) {
                 return features[feature];
             } else {
                 throw new Error("Feature " + feature + " not found");

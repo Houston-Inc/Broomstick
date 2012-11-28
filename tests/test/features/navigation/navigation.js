@@ -28,13 +28,13 @@ define([
             $('#testdata').append($nav);
             keys = new KeyMaster();
             navigation = new Navigation();
-            BaseFeature.prototype.featuresProxy = {
+            BaseFeature.prototype.setFeaturesProxy({
                 'SampleFeature': Sample,
                 'SectionFeature': Section,
                 get: function(feature) {
                     return BaseFeature.prototype.featuresProxy[feature];
                 }
-            };
+            });
         });
 
         afterEach(function() {

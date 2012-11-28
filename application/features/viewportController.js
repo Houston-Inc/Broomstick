@@ -1,16 +1,17 @@
 /*global window */
 define([
     'jquery',
+    'underscore',
     'backbone',
-    'features/baseFeature',
+    'features/VisibleFeature',
     'features/featureContainer'
-], function($, Backbone, BaseFeature, FeatureContainer, undefined) {
+], function($, _, Backbone, VisibleFeature, FeatureContainer, undefined) {
     "use strict";
 
     // ViewportController Feature
     // --------------------------
 
-    var ViewportControllerFeature = BaseFeature.extend({
+    var ViewportControllerFeature = VisibleFeature.extend({
 
         name: 'ViewportControllerFeature',
         sectionStackCSSId: 'section-stack-css',
@@ -105,7 +106,7 @@ define([
         },
 
         renderSectionCSS: function(id, css) {
-            if(!this._.isEmpty(css)) {
+            if(!_.isEmpty(css)) {
                 $(this.join("#", id)).remove();
                 $('<style id="' + id + '" type="text/css">' + css +'</style>').prependTo('head');
                 this.forceIE7Redraw();

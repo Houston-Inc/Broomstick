@@ -5,15 +5,15 @@
         'jquery',
         'backbone',
         'underscore',
-        'features/baseFeature',
+        'features/VisibleFeature',
         'features/featureContainer',
         'bootstrap-modal'
-    ], function($, Backbone, _, BaseFeature, FeatureContainer, btModal, undefined) {
+    ], function($, Backbone, _, VisibleFeature, FeatureContainer, btModal, undefined) {
 
         // NotFound Feature
         // ------------------------------
 
-        var NotFoundFeature = BaseFeature.extend({
+        var NotFoundFeature = VisibleFeature.extend({
             name: 'NotFoundFeature',
             element: 'body',
             templateId: '#not-found',
@@ -55,7 +55,7 @@
                 width = Math.floor(width + (Math.random()*(width * 0.2)+1));
                 height = Math.floor(height + (Math.random()*(height * 0.2)+1));
 
-                var kittenURL = this.kittenURL + width + '/' + height;
+                kittenURL = this.kittenURL + width + '/' + height;
                 if(!this.isRendered()) {
                     this.setElement(this.element);
                     var data = {
@@ -67,7 +67,7 @@
                                 return kittenURL;
                             }
                         }
-                    }
+                    };
                     this.$template.parent().render(data, directives);
                     this.$el.append(this.$template.parent());
                     this.setRendered(true);

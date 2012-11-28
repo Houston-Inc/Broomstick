@@ -1,5 +1,5 @@
-define(['jquery', 'features/baseFeature'], function($, BaseFeature, undefined) {
-    var DummyFeature = BaseFeature.extend({
+define(['jquery', 'features/VisibleFeature'], function($, VisibleFeature, undefined) {
+    var DummyFeature = VisibleFeature.extend({
 
         name: "DummyFeature",
 
@@ -44,7 +44,7 @@ define(['jquery', 'features/baseFeature'], function($, BaseFeature, undefined) {
 
             self.setElement(self.element);
             if(self.$el.contents().length === 0) {
-               self.$el.append($template);
+                self.$el.append($template);
             }
         }
     });

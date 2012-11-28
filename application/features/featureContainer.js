@@ -1,4 +1,8 @@
-define(['jquery', 'underscore', 'backbone'], function($, _, Backbone, undefined) {
+define([
+    'jquery',
+    'underscore',
+    'backbone'
+], function($, _, Backbone, undefined) {
     "use strict";
 
     // FeatureContainer
@@ -16,12 +20,9 @@ define(['jquery', 'underscore', 'backbone'], function($, _, Backbone, undefined)
 
 
     _.extend(FeatureContainer.prototype, {
-
         name: 'FeatureContainer',
 
-        add: function(feature) {
-
-
+        add: function add(feature) {
             if(this.features.push(feature)) {
                 featuresReady.push(feature.isResolved());
                 this.trigger('add', feature, this.features);
@@ -29,34 +30,33 @@ define(['jquery', 'underscore', 'backbone'], function($, _, Backbone, undefined)
             }
 
             return false;
-
         },
 
-        each: function(callback) {
+        each: function each(callback) {
             _.each(this.features, callback);
         },
 
-        getAt: function(index) {
+        getAt: function getAt(index) {
             return !!this.features[index] ? this.features[index] : undefined;
         },
 
-        getAll: function() {
+        getAll: function getAll() {
             return this.features;
         },
 
-        indexOf: function(feature) {
+        indexOf: function indexOf(feature) {
             return _.indexOf(this.features, feature);
         },
 
-        removeAll: function() {
+        removeAll: function removeAll() {
             this.features = [];
         },
 
-        count: function() {
+        count: function count() {
             return this.features.length;
         },
 
-        isResolved: function() {
+        isResolved: function isResolved() {
             return featuresReady;
         }
 

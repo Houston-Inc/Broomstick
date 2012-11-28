@@ -88,7 +88,6 @@ define(['tools/eventmachine'], function(eventMachine) {
         });
         describe('#hasBeenCalled', function() {
             it('returns true if event handler has been called', function() {
-                console.log('hasbeenCalled1');
                 var callback = function() {
                 };
                 eventMachine.subscribe('lol', callback);

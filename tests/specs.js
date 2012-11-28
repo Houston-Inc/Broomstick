@@ -7,6 +7,7 @@ define("specs", [
     "test/features/baseFeature",
     "test/features/featureContainer",
     "test/features/viewportController",
+    "test/features/VisibleFeature",
     "test/features/windowEventDispatcher",
     "test/features/accordion/accordion",
     "test/features/column/column",

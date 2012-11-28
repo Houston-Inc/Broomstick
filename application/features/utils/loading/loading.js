@@ -1,14 +1,14 @@
 define([
     'jquery',
     'backbone',
-    'features/baseFeature'
-], function($, Backbone, BaseFeature, undefined) {
+    'features/VisibleFeature'
+], function($, Backbone, VisibleFeature, undefined) {
     "use strict";
 
     // Loading Feature
     // ------------------------------
 
-    var LoadingFeature = BaseFeature.extend({
+    var LoadingFeature = VisibleFeature.extend({
         name: 'LoadingFeature',
         element: '#loading',
         defaultMessage: 'Ladataan...',

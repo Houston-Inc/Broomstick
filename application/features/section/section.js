@@ -1,15 +1,16 @@
 define([
     'jquery',
+    'underscore',
     'backbone',
-    'features/baseFeature',
+    'features/VisibleFeature',
     'features/featureContainer'
-], function($, Backbone, BaseFeature, FeatureContainer, undefined) {
+], function($, _, Backbone, VisibleFeature, FeatureContainer, undefined) {
     "use strict";
 
     // Section Feature
     // _______
 
-    var SectionFeature = BaseFeature.extend({
+    var SectionFeature = VisibleFeature.extend({
 
         name: 'SectionFeature',
         element: '#section',
@@ -37,7 +38,7 @@ define([
 
             self.initializeSubscriptions();
 
-            if(!self._.isString(id)) {
+            if(!_.isString(id)) {
                 throw new Error(self.name + ": Constructor expects id (String)");
             }
 

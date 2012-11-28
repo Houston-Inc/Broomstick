@@ -1,24 +1,60 @@
 define([
     'jquery',
     'underscore',
-    'backbone',
     'tools',
     'models',
     'collections',
     'views',
     'config'
-], function($, _, Backbone, tools, models, collections, views, config, undefined) {
+], function($, _, tools, models, collections, views, config, undefined) {
     "use strict";
 
-    var BaseFeature = Backbone.View.extend({
-        name: 'BaseFeature',
-        _renderable: true,
-        _featuresRenderable: true,
-        _rendered: false,
-        _feature: true,
-        _: _,
+    /* Stolen from Backbone's extend */
+    var creator = function(){};
 
-        initializeSubscriptions: function() {
+    var inherits = function(parent, protoProps, staticProps) {
+        var child;
+
+        if (protoProps && protoProps.hasOwnProperty('constructor')) {
+            child = protoProps.constructor;
+        } else {
+            child = function(){ parent.apply(this, arguments); };
+        }
+
+        _.extend(child, parent);
+
+        creator.prototype = parent.prototype;
+        child.prototype = new creator();
+        if (protoProps) _.extend(child.prototype, protoProps);
+
+        if (staticProps) _.extend(child, staticProps);
+        child.prototype.constructor = child;
+
+        child.__super__ = parent.prototype;
+
+        return child;
+    };
+
+    var extend = function extend(protoProps, classProps) {
+        var child = inherits(this, protoProps, classProps);
+        child.extend = this.extend;
+        return child;
+    };
+
+    var BaseFeature = function BaseFeature() {
+        this.initialize.apply(this, arguments);
+    };
+
+    BaseFeature.prototype = {
+        name: 'BaseFeature',
+        _renderable: false,
+        _featuresRenderable: true,
+        _feature: true,
+
+        initialize: function() {
+        },
+
+        initializeSubscriptions: function initializeSubscriptions() {
             var self = this;
             if(self.globalEvents) {
                 _.each(self.globalEvents, function(event, name) {
@@ -31,30 +67,30 @@ define([
             }
         },
 
-        getModel: function(name) {
+        getModel: function getModel(name) {
             return models.get(name);
         },
 
-        getCollection: function(name) {
+        getCollection: function getCollection(name) {
             return collections.get(name);
         },
 
-        getView: function(name) {
+        getView: function getView(name) {
             return views.get(name);
         },
 
-        getFeature: function(name) {
+        getFeature: function getFeature(name) {
             if(config.DEBUG) {
                 console.log("getFeature:", name);
             }
             return this.featuresProxy.get(name);
         },
 
-        getTemplate: function(selector, nounwrap) {
+        getTemplate: function getTemplate(selector, nounwrap) {
             return tools.templateStorage.get(selector, nounwrap);
         },
 
-        getConfig: function(name) {
+        getConfig: function getConfig(name) {
             var parts = name.split("."),
                 l, i, c = config;
 
@@ -68,23 +104,23 @@ define([
             return c;
         },
 
-        publish: function(eventName, eventData) {
+        publish: function publish(eventName, eventData) {
             if(!!eventData) {
                 eventData.listener = this;
             }
             tools.eventMachine.publish(eventName, !!eventData ? eventData : null);
         },
 
-        isSubscribed: function(eventName, callback) {
+        isSubscribed: function isSubscribed(eventName, callback) {
             return tools.eventMachine.isSubscribed(eventName, callback);
         },
 
-        subscribe: function(eventName, callback) {
+        subscribe: function subscribe(eventName, callback) {
             callback.listener = this;
             tools.eventMachine.subscribe(eventName, callback);
         },
 
-        scopedSubscribe: function(eventName, callback, scope) {
+        scopedSubscribe: function scopedSubscribe(eventName, callback, scope) {
             var method = function(eventData) {
                 callback.call(scope, eventData);
             };
@@ -94,21 +130,19 @@ define([
             tools.eventMachine.subscribe(eventName, method);
         },
 
-        resolve: function(value) {
+        resolve: function resolve(value) {
             this.loaded.resolve(value);
             tools.eventMachine.publish("featureResolved", this);
         },
 
-
-        registerFeature: function(feature) {
+        registerFeature: function registerFeature(feature) {
             var self = this, Feature, instance, featureName;
-
 
             if(!self.features) {
                 throw new Error( "FeaturesContainer not set for " + self.name );
             }
 
-            if(self.featureIsFeature(feature)) {
+            if(self.isFeature(feature)) {
                 instance = feature;
                 featureName = feature.name;
             } else {
@@ -126,7 +160,7 @@ define([
             return instance;
         },
 
-        deregisterFeature: function(feature) {
+        unregisterFeature: function unregisterFeature(feature) {
             var self = this;
             if(_.contains(self.features, feature)) {
                 self.features = _.without(self.features, feature);
@@ -135,49 +169,37 @@ define([
             return false;
         },
 
-        isResolved: function() {
+        isResolved: function isResolved() {
             if(!this.loaded) {
                 throw new Error("Deferred not set");
             }
             return this.loaded.promise();
         },
 
-        setRendered: function(renderedBoolean) {
-            this._rendered = renderedBoolean;
-        },
-
-        isRenderable: function() {
+        isRenderable: function isRenderable() {
             return this._renderable;
         },
 
-        setRenderable: function(renderableBoolean) {
+        setRenderable: function setRenderable(renderableBoolean) {
             this._renderable = renderableBoolean;
         },
 
-        isRendered: function() {
-            return this._rendered;
-        },
-
-        isFeature: function() {
-            return this._feature;
-        },
-
-        featureIsFeature: function(feature) {
-            return !_.isEmpty(feature) &&
-                    _.isObject(feature) &&
+        isFeature: function isFeature(feature) {
+            feature = feature || this;
+            return _.isObject(feature) &&
                     _.isFunction(feature.isFeature) &&
-                    feature.isFeature();
+                    feature._feature;
         },
 
-        isFeaturesRenderable: function() {
+        isFeaturesRenderable: function isFeaturesRenderable() {
             return this._featuresRenderable;
         },
 
-        setFeaturesRenderable: function(featuresRenderableBoolean) {
+        setFeaturesRenderable: function setFeaturesRenderable(featuresRenderableBoolean) {
             this._featuresRenderable = featuresRenderableBoolean;
         },
 
-        join: function() {
+        join: function join() {
             var string = "";
             _.each(arguments, function(argument) {
                 string += argument;
@@ -185,11 +207,7 @@ define([
             return string;
         },
 
-        templatesResolved: function() {
-            return tools.templateStorage.isResolved();
-        },
-
-        when: function(data, callback) {
+        when: function when(data, callback) {
             if(_.isArray(data)) {
                 $.when.apply($, data).done(callback);
             } else {
@@ -197,7 +215,7 @@ define([
             }
         },
 
-        featureActivated: function(featureActivated) {
+        featureActivated: function featureActivated(featureActivated) {
             if(featureActivated.feature === this &&
                 ((featureActivated.eventSource &&
                 !featureActivated.eventSource.route) ||
@@ -205,8 +223,15 @@ define([
                 this.publish('router.navigate', tools.urls.sanitizeToURL(this.uiName));
             }
         }
+    };
 
-    });
+    function setFeaturesProxy(featuresProxy) {
+        BaseFeature.featuresProxy = BaseFeature.prototype.featuresProxy = featuresProxy;
+    };
+
+    BaseFeature.setFeaturesProxy = BaseFeature.prototype.setFeaturesProxy = setFeaturesProxy;
+
+    BaseFeature.extend = extend;
 
     return BaseFeature;
 

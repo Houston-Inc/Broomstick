@@ -10,18 +10,16 @@ define([
     "use strict";
 
     var self = this,
-        baseFeature = new BaseFeature(),
+        baseFeature,
         staticHandler = function() {
             return true;
         },
         eventMachine = tools.eventMachine;
 
-        baseFeature.features = new FeatureContainer();
-
     transparency.register($);
 
     describe('BaseFeature', function() {
-        beforeEach(function(){
+        beforeEach(function() {
             baseFeature = new BaseFeature();
             baseFeature.features = new FeatureContainer();
         });
@@ -52,12 +50,25 @@ define([
         });
 
         describe('#isRenderable', function() {
-            it('returns true by default', function() {
-                expect(baseFeature.isRenderable()).to.be.ok();
+            it('returns false by default', function() {
+                expect(baseFeature.isRenderable()).to.not.be.ok();
             });
         });
 
         describe('#extend', function() {
+            it('adds new attributes to prototype', function() {
+                var Feature = BaseFeature.extend({
+                    a: 'a',
+                    b: function() {
+                        return 'b';
+                    }
+                });
+                expect(Feature.prototype.a).to.be.ok();
+                expect(Feature.prototype.a).to.be.a('string');
+
+                expect(Feature.prototype.b).to.be.ok();
+                expect(Feature.prototype.b).to.be.a('function');
+            });
             it('contains helper method accessing models', function(done) {
                 var baseFeature = BaseFeature.extend();
                 expect(baseFeature.prototype.getModel).to.be.a("function");
@@ -79,10 +90,32 @@ define([
                 done();
             });
         });
+        describe('#isFeature', function() {
+            it('returns true if object is a feature', function() {
+                var NewFeature = BaseFeature.extend();
+                expect(new NewFeature().isFeature()).to.be.ok();
+            });
+            it('returns false if object is not a feature', function() {
+                expect(BaseFeature.prototype.isFeature({})).to.not.be.ok();
+            });
+        });
+        describe('#setFeaturesProxy', function() {
+            it('sets the featuresProxy to the whole prototype', function() {
+                var featuresProxy = testtools.createFeaturesProxyObject();
+                BaseFeature.prototype.setFeaturesProxy(featuresProxy);
+                expect(BaseFeature.prototype.featuresProxy).to.be.ok();
+            });
+            it('feature proxy survives over extend', function() {
+                var featuresProxy = testtools.createFeaturesProxyObject();
+                BaseFeature.setFeaturesProxy(featuresProxy);
+                var NewFeature = BaseFeature.extend({});
+                expect(NewFeature.featuresProxy).to.be.ok();
+            });
+        });
         describe('#registerFeature', function() {
             it('returns sampleFeature', function() {
                 var sampleFeature;
-                BaseFeature.prototype.featuresProxy = features;
+                BaseFeature.prototype.setFeaturesProxy(features);
                 sampleFeature = baseFeature.registerFeature("SampleFeature");
                 expect(sampleFeature).to.be.ok();
             });

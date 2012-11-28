@@ -106,7 +106,7 @@ require([
 
         // Work around this, by changing dependency chains
         var BaseFeature = features.get('BaseFeature');
-        BaseFeature.prototype['__proto__'].featuresProxy = features;
+        BaseFeature.prototype.setFeaturesProxy(features);
 
         transparency.register($);
 

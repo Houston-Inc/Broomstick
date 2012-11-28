@@ -2,15 +2,15 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'features/baseFeature',
+    'features/VisibleFeature',
     'features/featureContainer'
-], function($, _, Backbone, BaseFeature, FeatureContainer, undefined) {
+], function($, _, Backbone, VisibleFeature, FeatureContainer, undefined) {
     "use strict";
 
     // Application Feature
     // -------------------
 
-    var ApplicationFeature = BaseFeature.extend({
+    var ApplicationFeature = VisibleFeature.extend({
 
         name: 'ApplicationFeature',
         el: 'body',
@@ -45,14 +45,18 @@ define([
                 column.registerFeature('SampleFeature');
 
                 self.when(self.features.isResolved(), function() {
-                    console.log("Features Resolved");
+                    if(self.getConfig('DEBUG')) {
+                        console.log("All features resolved");
+                    }
                     self.resolve(true);
                 });
             });
         },
 
         render: function() {
-            console.log("-- Application render");
+            if(this.getConfig('DEBUG')) {
+                console.log("-- Application render");
+            }
             var self = this;
 
             if(!self.isRendered()) {
@@ -66,7 +70,9 @@ define([
             var self = this;
             features.each(function(feature) {
                 if(feature.isRenderable()) {
-                    console.log("   -- Rendering ", feature.name, feature.features);
+                    if(self.getConfig('DEBUG')) {
+                        console.log("   -- Rendering ", feature.name, feature.features);
+                    }
                     feature.render();
                     if(feature.features instanceof FeatureContainer && feature.isFeaturesRenderable()) {
                         self.renderFeatures(feature.features);

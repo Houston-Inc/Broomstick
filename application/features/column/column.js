@@ -2,15 +2,15 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'features/baseFeature',
+    'features/VisibleFeature',
     'features/featureContainer'
-], function($, _, Backbone, BaseFeature, FeatureContainer, undefined) {
+], function($, _, Backbone, VisibleFeature, FeatureContainer, undefined) {
     "use strict";
 
     // Column Feature
     // --------------
 
-    var ColumnFeature = BaseFeature.extend({
+    var ColumnFeature = VisibleFeature.extend({
 
         name: 'ColumnFeature',
         element: 'div#main',

@@ -47,7 +47,10 @@ define([
                 module.registerFeature(module);
             });
             it('adds column to columns array', function(done) {
-                var features = testtools.createFeatures();
+                var featurePrototypes = testtools.createFeaturePrototypeList(),
+                    features = testtools.createFeatures(featurePrototypes),
+                    featuresProxy = testtools.createFeaturesProxyObject(featurePrototypes);
+                module.setFeaturesProxy(featuresProxy);
                 var called = 1;
                 module.subscribe('module.addedFeature', function(feature){
                     if(called === 3) {

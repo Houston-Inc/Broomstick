@@ -14,11 +14,11 @@ define('tools', [
     var key, tools = {};
 
     _.each(arguments, function(value, key, list) {
-        tools[list[key].name] = value;
+        if(value && value.name) {
+            tools[value.name] = value;
+        }
     });
 
     return tools;
 
 });
-
-

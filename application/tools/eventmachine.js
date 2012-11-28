@@ -16,7 +16,6 @@ define(['underscore', 'config', 'tools/polyfills'], function(_, config, polyfill
             },
 
             unsubscribe: function(eventName, eventHandlers) {
-                console.log('-------------UNSC');
                 if(_.isArray(subscriptions[eventName])) {
                     subscriptions[eventName] = _.without(subscriptions[eventName], eventHandlers);
                 }

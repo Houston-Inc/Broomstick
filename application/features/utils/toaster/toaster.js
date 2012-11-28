@@ -3,15 +3,15 @@ define([
     'underscore',
     'backbone',
     'bootstrap-alert',
-    'features/baseFeature',
+    'features/VisibleFeature',
     'features/featureContainer'
-], function($, _, Backbone, toaster, BaseFeature, FeatureContainer, undefined) {
+], function($, _, Backbone, toaster, VisibleFeature, FeatureContainer, undefined) {
     "use strict";
 
     // Toaster Feature
     // ------------------------------
 
-    var ToasterFeature = BaseFeature.extend({
+    var ToasterFeature = VisibleFeature.extend({
 
         name: 'ToasterFeature',
         element: '#toaster',
@@ -48,7 +48,7 @@ define([
 
             var elem = this.getTemplate(this.templateId);
             elem.render(data);
-            
+
             this.$el.append(elem);
             elem.queue(function() {
                 setTimeout(function() {
