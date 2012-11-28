@@ -4,7 +4,6 @@ define('tools', [
     'underscore',
     'tools/templatestorage',
     'tools/eventmachine',
-    'tools/exceptions',
     'tools/urls',
     'tools/classificationHelpers'
 ], function(_) {

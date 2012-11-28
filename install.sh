@@ -55,7 +55,7 @@ if [ "$confirm" = "yes" ] || [ "$confirm" = "y" ]; then
     npm search backbone > /dev/null 2>&1
 
     SYSWIDE_NPM_DEPS="jamjs grunt"
-    LOCAL_NPM_DEPS="wrench node-static http-proxy grunt-clean grunt-recess grunt-requirejs grunt-mocha"
+    LOCAL_NPM_DEPS="wrench node-static http-proxy grunt-clean grunt-recess grunt-requirejs grunt-mocha pty.js"
 
     echo "Installing system wide dependencies [$SYSWIDE_NPM_DEPS], we need to sudo to do that."
     for DEPENDENCY in $SYSWIDE_NPM_DEPS
