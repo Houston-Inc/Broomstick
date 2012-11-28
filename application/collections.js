@@ -9,7 +9,7 @@ define("collections", [
     var key, collections = {};
 
     _.each(arguments, function(value, key, list) {
-        collections[list[key].prototype.name] = list[key];
+        collections[value.prototype.name] = value;
     });
 
     return {
@@ -20,4 +20,3 @@ define("collections", [
         }
     };
 });
-
