@@ -25,9 +25,10 @@ define('features', [
 
     var key, features = {}, deferreds = [];
     _.each(arguments, function(value, key, list) {
-        if(!!list[key].prototype.name) {
-            features[list[key].prototype.name] = value;
+        if(value !== _ && !value && value.prototype.name) {
+            throw new Error('All features have to have a name!');
         }
+        features[value.prototype.name] = value;
     });
 
     return {
