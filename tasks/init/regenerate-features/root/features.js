@@ -12,7 +12,7 @@ define('features', [
         if(value !== _ && !value && value.prototype.name) {
             throw new Error('All features have to have a name!');
         }
-        features[value.prototype.name] = value;
+        _ !== value ? features[value.prototype.name] = value : _.isEmpty();
     });
 
     return {

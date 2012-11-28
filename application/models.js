@@ -10,7 +10,10 @@ define("models", [
     var key, models = {};
 
     _.each(arguments, function(value, key, list) {
-        models[list[key].prototype.name] = list[key];
+        if(value !== _ && !value && value.prototype.name) {
+            throw new Error('All models have to have a name!');
+        }
+        _ !== value ? models[value.prototype.name] = value : _.isEmpty();
     });
 
     return {
@@ -22,4 +25,3 @@ define("models", [
     };
 
 });
-

@@ -9,7 +9,10 @@ define("collections", [
     var key, collections = {};
 
     _.each(arguments, function(value, key, list) {
-        collections[value.prototype.name] = value;
+        if(value !== _ && !value && value.prototype.name) {
+            throw new Error('All collections have to have a name!');
+        }
+        _ !== value ? collections[value.prototype.name] = value : _.isEmpty();
     });
 
     return {
