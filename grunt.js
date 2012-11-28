@@ -82,10 +82,6 @@ module.exports = function(grunt) {
                     'keymaster': {
                         exports: 'key'
                     },
-                    'highcharts': {
-                        deps: ['jquery'],
-                        exports: 'Highcharts'
-                    },
                     'bootstrap-button': {
                         deps: ['jquery']
                     },
@@ -94,9 +90,6 @@ module.exports = function(grunt) {
                     },
                     'bootstrap': {
                         deps: ['bootstrap-button','bootstrap-modal']
-                    },
-                    'flexpaper': {
-                        deps: ['jquery','jqueryExtension']
                     }
                 },
                 paths: {
@@ -113,8 +106,6 @@ module.exports = function(grunt) {
                     backbone:            '../application/jam/backbone/backbone',
                     transparency:        '../application/jam/transparency/lib/transparency',
                     keymaster:           '../application/jam/keymaster/keymaster',
-                    highcharts:          '../application/jam/highcharts/highcharts.src',
-                    flexpaper:           '../application/lib/flexpaper/js/flexpaper',
                     jqueryExtension:     '../application/lib/flexpaper/js/jquery.extensions.min',
                     models:              '../application/models',
                     collections:         '../application/collections',
