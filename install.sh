@@ -51,6 +51,8 @@ if [ "$confirm" = "yes" ] || [ "$confirm" = "y" ]; then
     currentPath=`pwd`
     echo "Installing node_modules to $currentPath/node_modules"
 
+    # Making sure that ~/.npm folder is created
+    npm search backbone > /dev/null 2>&1
 
     SYSWIDE_NPM_DEPS="jamjs grunt"
     LOCAL_NPM_DEPS="wrench node-static http-proxy grunt-clean grunt-recess grunt-requirejs grunt-mocha"
