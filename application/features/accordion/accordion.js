@@ -2,9 +2,8 @@ define([
     'jquery',
     'backbone',
     'features/baseFeature',
-    'features/featureContainer',
-    'tools/exceptions'
-], function($, Backbone, BaseFeature, FeatureContainer, exceptions, undefined) {
+    'features/featureContainer'
+], function($, Backbone, BaseFeature, FeatureContainer, undefined) {
     "use strict";
 
     // Accordion Feature
@@ -25,7 +24,7 @@ define([
             var self = this;
 
             if(!self._.isString(id)) {
-                throw new exceptions.FatalError(self.name + ": Constructor expects id (String)");
+                throw new Error(self.name + ": Constructor expects id (String)");
             }
 
             self.id = id;
