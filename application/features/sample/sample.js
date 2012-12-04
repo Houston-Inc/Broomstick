@@ -25,8 +25,6 @@ define([
         initialize: function() {
             var self = this;
 
-            self.initializeSubscriptions();
-
             self.features = new FeatureContainer();
 
             self.loaded = $.Deferred();

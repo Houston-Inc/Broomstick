@@ -28,7 +28,6 @@ define([
             var self = this;
 
             self.loaded = $.Deferred();
-            self.initializeSubscriptions();
 
             self.createIEStyles();
 

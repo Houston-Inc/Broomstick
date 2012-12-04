@@ -25,8 +25,6 @@ define([
 
             self.loaded = $.Deferred();
 
-            self.initializeSubscriptions();
-
             self.when(self.templatesResolved(),function() {
                 self.$template = self.getTemplate(self.templateId);
                 self.resolve(true);

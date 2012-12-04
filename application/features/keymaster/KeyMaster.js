@@ -16,7 +16,6 @@ define(['jquery', 'features/baseFeature', 'keymaster', 'underscore'], function($
 
         initialize: function() {
             this.loaded = $.Deferred();
-            this.initializeSubscriptions();
             this.resolve();
         },
         registerKeyEvents: function(feature) {

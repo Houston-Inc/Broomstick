@@ -18,12 +18,10 @@ define([
             'eventName': 'eventHandler'
         },
 
-   		initialize: function() {
+        initialize: function() {
             var self = this;
 
             self.loaded = $.Deferred();
-
-            self.initializeSubscriptions();
 
             self.features = new FeatureContainer();
 
@@ -67,7 +65,7 @@ define([
                 directives = {
                     dataObject: {
                         'id': function() {
-                        	return this.id;
+                            return this.id;
                         }
                     }
                 };
@@ -77,24 +75,24 @@ define([
             self.$template.render(data, directives);
 
             if(!self.isRendered()) {
-            	self.setElement(self.element);
+                self.setElement(self.element);
                 self.$el.append(self.$template);
                 self.setRendered(true);
             }
 
-        }
+        },
 
         render: function() {
             var self = this;
 
             if(!self.isRendered()) {
-	            self.setElement(self.element);
+                self.setElement(self.element);
                 self.$el.append(self.$template);
                 self.setRendered(true);
             }
         }
 
-   	});
+    });
 
     return {%= capitalizedName %}Feature;
 

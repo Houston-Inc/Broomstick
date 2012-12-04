@@ -44,8 +44,6 @@ define([
 
             self.setFeaturesRenderable(false);
 
-            self.initializeSubscriptions();
-
             self.activeFeature = undefined;
 
             self.loaded = $.Deferred();
