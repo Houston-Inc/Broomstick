@@ -118,7 +118,6 @@ define([
         },
 
         resize: function() {
-            console.log("wowowowfsfsajfkjsanfjkas");
             var self = this;
             self.height = self.$el.height();
             self.width = self.$el.width();

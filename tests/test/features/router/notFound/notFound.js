@@ -49,7 +49,6 @@
                     originalURL = window.location.pathname + window.location.search;
                 });
                 afterEach(function(){
-                    router = new Router();
                     router.navigate(originalURL);
                 });
                 it('contains spesific route', function(done) {

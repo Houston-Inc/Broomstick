@@ -1,16 +1,19 @@
 define([
     'jquery',
     'transparency',
+    'features/router/router',
     'features/baseFeature',
     'features/featureContainer',
     'tools',
     'lib/testtools',
     'features'
-], function($, transparency, BaseFeature, FeatureContainer, tools, testtools, features) {
+], function($, transparency, Router, BaseFeature, FeatureContainer, tools, testtools, features) {
     "use strict";
 
     var self = this,
         baseFeature,
+        router,
+        originalURL,
         staticHandler = function() {
             return true;
         },
@@ -20,6 +23,7 @@ define([
 
     describe('BaseFeature', function() {
         beforeEach(function() {
+            router = new Router();
             baseFeature = new BaseFeature();
             baseFeature.features = new FeatureContainer();
         });
@@ -194,6 +198,12 @@ define([
             });
         });
         describe('#featureActivated', function() {
+            beforeEach(function() {
+                originalURL = window.location.pathname + window.location.search;
+            });
+            afterEach(function(){
+                router.navigate(originalURL);
+            });
             it('sends router.navigate event', function(done) {
                 eventMachine.subscribe('router.navigate', function() {
                     done();

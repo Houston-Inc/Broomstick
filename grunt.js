@@ -83,13 +83,16 @@ module.exports = function(grunt) {
                         exports: 'key'
                     },
                     'bootstrap-button': {
-                        deps: ['jquery']
+                        deps: ['bootstrap']
                     },
                     'bootstrap-modal': {
-                        deps: ['jquery']
+                        deps: ['bootstrap']
+                    },
+                    'bootstrap-alert': {
+                        deps: ['bootstrap']
                     },
                     'bootstrap': {
-                        deps: ['bootstrap-button','bootstrap-modal']
+                        deps: ['bootstrap-button','bootstrap-modal','bootstrap-alert']
                     }
                 },
                 paths: {
@@ -101,7 +104,7 @@ module.exports = function(grunt) {
                     bootstrap:           '../application/jam/bootstrap/main',
                     'bootstrap-button':  '../application/jam/bootstrap/js/bootstrap-button',
                     'bootstrap-alert':   '../application/jam/bootstrap/js/bootstrap-alert',
-                    'bootstrap-modal':   '../application/lib/bootstrap-modal',
+                    'bootstrap-modal':   '../application/jam/bootstrap/js/bootstrap-modal',
                     underscore:          '../application/jam/underscore/underscore',
                     'underscore.string': '../application/jam/underscore.string/lib/underscore.string',
                     backbone:            '../application/jam/backbone/backbone',
@@ -142,16 +145,16 @@ module.exports = function(grunt) {
                         exports: 'key'
                     },
                     'bootstrap-button': {
-                        deps: ['jquery']
+                        deps: ['bootstrap']
                     },
                     'bootstrap-modal': {
-                        deps: ['jquery']
+                        deps: ['bootstrap']
+                    },
+                    'bootstrap-alert': {
+                        deps: ['bootstrap']
                     },
                     'bootstrap': {
-                        deps: ['bootstrap-button','bootstrap-modal']
-                    },
-                    'flexpaper': {
-                        deps: ['jquery','jqueryExtension']
+                        deps: ['bootstrap-button','bootstrap-modal','bootstrap-alert']
                     }
                 },
                 paths: {
@@ -164,7 +167,7 @@ module.exports = function(grunt) {
                     bootstrap:           'jam/bootstrap/main',
                     'bootstrap-button':  '../application/jam/bootstrap/js/bootstrap-button',
                     'bootstrap-alert':   '../application/jam/bootstrap/js/bootstrap-alert',
-                    'bootstrap-modal':   '../application/lib/bootstrap-modal',
+                    'bootstrap-modal':   '../application/jam/bootstrap/js/bootstrap-modal',
                     keymaster:           'jam/keymaster/keymaster',
                     models:              'models',
                     collections:         'collections',
