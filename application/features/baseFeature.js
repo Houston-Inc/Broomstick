@@ -228,7 +228,7 @@ define([
 
         featureActivated: function featureActivated(eventData) {
             if(eventData.feature === this &&
-                (!featureActivated.eventSource || 
+                (!featureActivated.eventSource ||
                     (eventData.eventSource && !featureActivated.eventSource.route))) {
                 this.publish('router.navigate', tools.urls.sanitizeToURL(this.uiName));
             }

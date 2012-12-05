@@ -16,7 +16,8 @@ define('features', [
     "features/navigation/navigation",
     "features/router/router",
     "features/router/notFound/notFound",
-    "features/sample/sample",
+    "features/samples/sample/sample",
+    "features/samples/sample2/sample2",
     "features/section/section",
     "features/utils/loading/loading",
     "features/utils/toaster/toaster"

@@ -39,9 +39,9 @@ define([
                 self.registerFeature('NotFoundFeature');
                 self.registerFeature('NavigationFeature');
 
-
                 column = self.registerFeature('ColumnFeature');
                 column.registerFeature('SampleFeature');
+                column.registerFeature('Sample2Feature');
 
                 self.when(self.features.isResolved(), function() {
                     if(self.getConfig('DEBUG')) {

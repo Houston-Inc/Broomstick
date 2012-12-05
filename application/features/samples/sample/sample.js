@@ -56,7 +56,7 @@ define([
         },
 
         activated: function(featureActivated) {
-            this.featureActivated.call(featureActivated);
+            this.featureActivated.call(this, featureActivated);
         }
 
     });

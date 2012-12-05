@@ -9,7 +9,6 @@
         'features/featureContainer',
         'bootstrap-modal'
     ], function($, Backbone, _, VisibleFeature, FeatureContainer, btModal, undefined) {
-
         // NotFound Feature
         // ------------------------------
 
@@ -40,8 +39,11 @@
             },
 
             notFound: function(args, route) {
+                console.log("jiouuu");
                 if(args && args.length > 0 && args[0] !== '') {
+                    
                     this.render();
+                    console.log("cool",this.$template.parent());
                     this.$template.parent().modal();
                 }
                 $('#loading').css({'z-index': 'auto', background: 'none'});
