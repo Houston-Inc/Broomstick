@@ -12,8 +12,8 @@ define([
 
     var AccordionFeature = VisibleFeature.extend({
 
-        name:           'AccordionFeature',
-        element:        'div#accordion',
+        name: 'AccordionFeature',
+        element: 'div#accordion',
 
         events: {
             'click .accordion-buttons .prev' : 'prev',
@@ -114,9 +114,9 @@ define([
                     'next': {
                         'text': function(params) {
                             if(params.index === self.features.count() - 1) {
-                                return 'Valmis';
+                                return 'Ready';
                             }
-                            return 'Seuraava';
+                            return 'Next';
                         },
                         'class': function(params) {
                             if(params.index === self.features.count() - 1) {

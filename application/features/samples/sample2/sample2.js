@@ -14,6 +14,7 @@ define([
         name: 'Sample2Feature',
         uiName: 'Sample 2',
         element: 'li#Sample2Feature',
+        sectionId: 'sample2-section',
 
         globalEvents: {
             'navigation.activeFeatureSet': 'activated'
@@ -28,31 +29,36 @@ define([
             self.features = new FeatureContainer();
 
             self.loaded = $.Deferred();
+            
+            var Section = self.getFeature('SectionFeature'),
+                section = new Section("sample2-section", self.element, true),
+                Accordion = self.getFeature("AccordionFeature"),
+                accordion = new Accordion("analyzer-accordion", self.sectionId),
+                Acco1 = self.getFeature("AccoFeature"),
+                acco1 = new Acco1("acco-content .accordion-inner"),
+                Acco2 = self.getFeature("Acco2Feature"),
+                acco2 = new Acco2("acco2-content .accordion-inner"),
+                JsonFeature = self.getFeature("JsonFeature"),
+                jsonFeature = new JsonFeature("json", self.sectionId);
 
-            self.when(self.templatesResolved(),function() {
+            self.accordion = accordion;
+            self.registerFeature(section);
 
-                var Section = self.getFeature('SectionFeature'),
-                    section = new Section("sample2-section", self.element, true);
+            section.registerFeature(accordion);
+            section.registerFeature(jsonFeature);
 
-                self.section = section;
-                self.registerFeature(section);
+            accordion.registerFeature(acco1);
+            accordion.registerFeature(acco2);
 
-                self.$template = self.getTemplate(self.element);
-                self.resolve(true);
-            });
+            self.resolve(true);
 
             self.publish('router.registerRoutes', self);
             self.publish('moduleInitialized', self);
         },
 
         render: function() {
-            var self = this;
-
-            /*if(!self.isRendered()) {
-                self.setElement(self.element);
-                self.$el.append(self.$template);
-                self.setRendered(true);
-            }*/
+            // var self = this;
+            // No need to render here, child features will do that!
         },
 
         activated: function(featureActivated) {

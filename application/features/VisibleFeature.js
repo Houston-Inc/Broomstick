@@ -13,9 +13,9 @@ define([
         _renderable: true,
         _rendered: false,
 
-        constructor: function constructor(options) {
-            Backbone.View.prototype.constructor.call(this, options);
-            BaseFeature.prototype.initialize.call(this, options);
+        constructor: function constructor() {
+            Backbone.View.prototype.constructor.apply(this, arguments);
+            BaseFeature.prototype.initialize.apply(this, arguments);
         },
 
         setRendered: function setRendered(renderedBoolean) {

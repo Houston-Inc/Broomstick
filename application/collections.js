@@ -3,7 +3,7 @@
  */
 define("collections", [
     'underscore',
-    "collections/aggregations"
+    "collections/datas"
 ], function(_) {
     "use strict";
     var collections = {};

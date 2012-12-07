@@ -15,7 +15,7 @@ define([
         name: 'ApplicationFeature',
         el: 'body',
         globalEvents: {
-            'featureResolved'   : 'featureResolved'
+            'featureResolved' : 'featureResolved'
         },
         templateId: '#broomstick',
 

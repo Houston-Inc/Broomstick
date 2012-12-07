@@ -1,19 +1,19 @@
 define([
     'jquery',
     'transparency',
-    'collections/aggregations',
+    'collections/datas',
     'tools'
-], function($, transparency, Aggregations, tools) {
+], function($, transparency, Datas, tools) {
     "use strict";
 
     var self = this;
 
     transparency.register($);
 
-    describe('Aggregations Collection', function() {
+    describe('Datas Collection', function() {
         describe('#initialize', function() {
             it('should initialize successfully', function(done) {
-                var instance = new Aggregations(undefined);
+                var instance = new Datas(undefined);
                 expect(instance).to.be.ok();
                 done();
             });
@@ -21,12 +21,12 @@ define([
 
         describe('#contains', function() {
             it('should contain models when reset is triggered', function(done) {
-                tools.eventMachine.subscribe("AggregationsCollection:AggregationsLoaded", function(classifications) {
-                    expect(instance.at(0).get("name")).to.be.eql("Määrä");
+                tools.eventMachine.subscribe("collection.datasLoaded", function(datas) {
+                    expect(datas.at(0).get("name")).to.be.eql("JSON Data");
                     done();
                 });
-                var instance = new Aggregations(undefined);
-                instance.add([{"id":"1","name":"Määrä"},{"id":"2","name":"Prosentti"}]);
+                var instance = new Datas(undefined);
+                instance.add([{"id":"1","name":"JSON Data","content": "This data is dynamically loaded!"}]);
                 instance.trigger("reset");
             });
         });

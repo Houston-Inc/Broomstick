@@ -1,20 +1,20 @@
 define([
     'jquery',
     'backbone',
-    'models/aggregation',
+    'models/data',
     'config',
     'tools/eventmachine'
-], function($, Backbone, Aggregation, config, eventMachine) {
+], function($, Backbone, Data, config, eventMachine) {
     "use strict";
     
-    // Aggregations Collection
+    // Datas Collection
     // ---------------
-    var Aggregations = Backbone.Collection.extend({
+    var Datas = Backbone.Collection.extend({
 
-        name: "Aggregations",
+        name: "Datas",
         // Reference to this collection's model.
-        model: Aggregation,
-        url: config.HOST + config.PATHS.AGGREGATE,
+        model: Data,
+        url: config.HOST + config.PATHS.DATA,
         count: 0,
         loaded: $.Deferred(),
 
@@ -22,12 +22,12 @@ define([
             var self = this;
 
             self.on("reset", function() {
-                eventMachine.publish("AggregationsCollection:AggregationsLoaded", self);
+                eventMachine.publish("collection.datasLoaded", self);
                 self.loaded.resolve(true);
             });
         }
     });
 
-    return Aggregations;
+    return Datas;
 
 });
