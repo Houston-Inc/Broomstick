@@ -3,7 +3,7 @@
  */
 define("models", [
     'underscore',
-    "models/aggregation"
+    "models/data"
 ], function(_) {
     "use strict";
 

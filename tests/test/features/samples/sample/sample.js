@@ -1,7 +1,7 @@
 define([
     'jquery',
     'transparency',
-    'features/sample/sample',
+    'features/samples/sample/sample',
     'lib/testtools'
 ], function($, transparency, Sample, testtools) {
     "use strict";

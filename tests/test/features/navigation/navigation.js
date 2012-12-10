@@ -5,12 +5,13 @@ define([
     'features/navigation/navigation',
     'features/baseFeature',
     'features/section/section',
+    'features/samples/hello/hello',
     'tools',
     'lib/testtools',
     'test-assets',
-    'features/sample/sample',
+    'features/samples/sample/sample',
     'features/keymaster/KeyMaster'
-], function($, _, transparency, Navigation, BaseFeature, Section, tools, testtools, testAssets, Sample, KeyMaster) {
+], function($, _, transparency, Navigation, BaseFeature, Section, Hello, tools, testtools, testAssets, Sample, KeyMaster) {
     "use strict";
 
     var self = this,
@@ -31,6 +32,7 @@ define([
             BaseFeature.prototype.setFeaturesProxy({
                 'SampleFeature': Sample,
                 'SectionFeature': Section,
+                'HelloFeature': Hello,
                 get: function(feature) {
                     return BaseFeature.prototype.featuresProxy[feature];
                 }

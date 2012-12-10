@@ -15,12 +15,16 @@ define("specs", [
     "test/features/navigation/navigation",
     "test/features/router/router",
     "test/features/router/notFound/notFound",
-    "test/features/sample/sample",
+    "test/features/samples/acco/acco",
+    "test/features/samples/acco2/acco2",
+    "test/features/samples/hello/hello",
+    "test/features/samples/json/json",
+    "test/features/samples/sample/sample",
     "test/features/section/section",
     "test/features/utils/loading/loading",
     "test/features/utils/toaster/toaster",
     "test/tools/eventmachine",
     "test/tools/templatestorage",
     "test/tools/urls",
-    "test/collections/aggregations"
+    "test/collections/datas"
 ], function() {});

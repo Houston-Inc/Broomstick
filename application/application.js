@@ -17,7 +17,7 @@ require.config({
         },
         {
             "name": "bootstrap-modal",
-            "location": "lib",
+            "location": "jam/bootstrap/js",
             "main": "./bootstrap-modal"
         },
         {

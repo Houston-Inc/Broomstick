@@ -1,11 +1,11 @@
 define(['backbone', 'tools/eventmachine'], function(Backbone, eventMachine) {
     "use strict";
     
-    // Aggregation Model
+    // Data Model
     // -----------
 
-    var Aggregation = Backbone.Model.extend({
-        name: 'Aggregation',
+    var Data = Backbone.Model.extend({
+        name: 'Data',
 
         initialize: function(data) {
             var self = this;
@@ -13,6 +13,6 @@ define(['backbone', 'tools/eventmachine'], function(Backbone, eventMachine) {
 
     });
     
-    return Aggregation;
+    return Data;
 
 });

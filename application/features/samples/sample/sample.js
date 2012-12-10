@@ -25,19 +25,22 @@ define([
         initialize: function() {
             var self = this;
 
-            self.initializeSubscriptions();
-
             self.features = new FeatureContainer();
 
             self.loaded = $.Deferred();
 
             self.when(self.templatesResolved(),function() {
-
                 var Section = self.getFeature('SectionFeature'),
-                    section = new Section("sample-section", self.element, true);
+                    section = new Section("sample-section", self.element, true),
+                    HelloFeature = self.getFeature('HelloFeature');
+
+                console.log("hmm",HelloFeature);
+                var hello = new HelloFeature('hello', 'sample-section');
 
                 self.section = section;
                 self.registerFeature(section);
+
+                section.registerFeature(hello);
 
                 self.$template = self.getTemplate(self.element);
                 self.resolve(true);
@@ -48,17 +51,12 @@ define([
         },
 
         render: function() {
-            var self = this;
-
-            /*if(!self.isRendered()) {
-                self.setElement(self.element);
-                self.$el.append(self.$template);
-                self.setRendered(true);
-            }*/
+            // var self = this;
+            // No need to render here, child features will do that!
         },
 
         activated: function(featureActivated) {
-            this.featureActivated.call(featureActivated);
+            this.featureActivated.call(this, featureActivated);
         }
 
     });

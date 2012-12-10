@@ -27,7 +27,7 @@ define([
         });
 
         describe('#activate', function() {
-            it('should add error handler to global jquery ajax handler', function(done) {
+            it('should add error handler to global jquery ajax handler', function(done) {               
                 ajaxError.subscribe("ajaxError", function(eventData) {
                     done();
                 });

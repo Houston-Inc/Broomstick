@@ -42,7 +42,7 @@ require.config({
         expect:                 'lib/assertion/expect',
         jquery:                 '../application/jam/jquery/jquery',
         bootstrap:              'bootstrap',
-        'bootstrap-alert':     '../application/jam/bootstrap/js/bootstrap-alert',
+        'bootstrap-alert':      '../application/jam/bootstrap/js/bootstrap-alert',
         'bootstrap-button':     '../application/jam/bootstrap/js/bootstrap-button',
         'bootstrap-modal':      '../application/jam/bootstrap/js/bootstrap-modal',
         underscore:             '../application/jam/underscore/underscore',

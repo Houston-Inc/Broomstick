@@ -15,9 +15,9 @@ define("config", function() {
         TEMPLATE_STORAGE_PATH: 'templates/all.html',
         PATHS: {
             // JSONP path
-            //AGGREGATE: '/sample/aggregate.json?callback=?',
+            //DATA: '/data.json?callback=?',
             // JSON path
-            AGGREGATE: '/sample/aggregate.json'
+            DATA: '/data.json'
         }
     };
 

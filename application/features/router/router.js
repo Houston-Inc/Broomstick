@@ -22,8 +22,6 @@ define([
         initialize: function() {
             var self = this;
 
-            self.initializeSubscriptions();
-
             self.router = new Backbone.Router();
             self._registeredRoutes = {};
 

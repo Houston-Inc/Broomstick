@@ -13,6 +13,11 @@ define([
         _renderable: true,
         _rendered: false,
 
+        constructor: function constructor() {
+            Backbone.View.prototype.constructor.apply(this, arguments);
+            BaseFeature.prototype.initialize.apply(this, arguments);
+        },
+
         setRendered: function setRendered(renderedBoolean) {
             if(_.isBoolean(renderedBoolean)) {
                 this._rendered = renderedBoolean;

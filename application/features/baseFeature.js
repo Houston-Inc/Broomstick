@@ -42,11 +42,13 @@ define([
     var extend = function extend(protoProps, classProps) {
         var child = inherits(this, protoProps, classProps);
         child.extend = this.extend;
+
         return child;
     };
 
     var BaseFeature = function BaseFeature() {
         this.initialize.apply(this, arguments);
+        BaseFeature.prototype.initialize.apply(this, arguments);
     };
 
     BaseFeature.prototype = {
@@ -54,8 +56,13 @@ define([
         _renderable: false,
         _featuresRenderable: true,
         _feature: true,
+        _initialized: false,
 
         initialize: function() {
+            if(!this._initialized) {
+                this.initializeSubscriptions();
+            }
+            this._initialized = true;
         },
 
         initializeSubscriptions: function initializeSubscriptions() {
@@ -221,8 +228,8 @@ define([
 
         featureActivated: function featureActivated(eventData) {
             if(eventData.feature === this &&
-                ((eventData.eventSource && !featureActivated.eventSource.route) ||
-                 !featureActivated.eventSource)) {
+                (!featureActivated.eventSource ||
+                    (eventData.eventSource && !featureActivated.eventSource.route))) {
                 this.publish('router.navigate', tools.urls.sanitizeToURL(this.uiName));
             }
         }

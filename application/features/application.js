@@ -15,14 +15,13 @@ define([
         name: 'ApplicationFeature',
         el: 'body',
         globalEvents: {
-            'featureResolved'   : 'featureResolved'
+            'featureResolved' : 'featureResolved'
         },
         templateId: '#broomstick',
 
         initialize: function() {
             var self = this;
 
-            self.initializeSubscriptions();
             self.loaded = $.Deferred();
             self.features = new FeatureContainer();
 
@@ -40,9 +39,9 @@ define([
                 self.registerFeature('NotFoundFeature');
                 self.registerFeature('NavigationFeature');
 
-
                 column = self.registerFeature('ColumnFeature');
                 column.registerFeature('SampleFeature');
+                column.registerFeature('Sample2Feature');
 
                 self.when(self.features.isResolved(), function() {
                     if(self.getConfig('DEBUG')) {

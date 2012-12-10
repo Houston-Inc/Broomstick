@@ -36,8 +36,6 @@ define([
 
             self.loaded = $.Deferred();
 
-            self.initializeSubscriptions();
-
             if(!_.isString(id)) {
                 throw new Error(self.name + ": Constructor expects id (String)");
             }

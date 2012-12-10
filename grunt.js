@@ -83,13 +83,16 @@ module.exports = function(grunt) {
                         exports: 'key'
                     },
                     'bootstrap-button': {
-                        deps: ['jquery']
+                        deps: ['bootstrap']
                     },
                     'bootstrap-modal': {
-                        deps: ['jquery']
+                        deps: ['bootstrap']
+                    },
+                    'bootstrap-alert': {
+                        deps: ['bootstrap']
                     },
                     'bootstrap': {
-                        deps: ['bootstrap-button','bootstrap-modal']
+                        deps: ['bootstrap-button','bootstrap-modal','bootstrap-alert']
                     }
                 },
                 paths: {
@@ -100,8 +103,8 @@ module.exports = function(grunt) {
                     jquery:              '../application/jam/jquery/jquery',
                     bootstrap:           '../application/jam/bootstrap/main',
                     'bootstrap-button':  '../application/jam/bootstrap/js/bootstrap-button',
-                    'bootstrap-modal':   '../application/lib/bootstrap-modal',
-                    'bootstrap-alert':  '../application/jam/bootstrap/js/bootstrap-alert',
+                    'bootstrap-alert':   '../application/jam/bootstrap/js/bootstrap-alert',
+                    'bootstrap-modal':   '../application/jam/bootstrap/js/bootstrap-modal',
                     underscore:          '../application/jam/underscore/underscore',
                     'underscore.string': '../application/jam/underscore.string/lib/underscore.string',
                     backbone:            '../application/jam/backbone/backbone',
@@ -142,16 +145,16 @@ module.exports = function(grunt) {
                         exports: 'key'
                     },
                     'bootstrap-button': {
-                        deps: ['jquery']
+                        deps: ['bootstrap']
                     },
                     'bootstrap-modal': {
-                        deps: ['jquery']
+                        deps: ['bootstrap']
+                    },
+                    'bootstrap-alert': {
+                        deps: ['bootstrap']
                     },
                     'bootstrap': {
-                        deps: ['bootstrap-button','bootstrap-modal']
-                    },
-                    'flexpaper': {
-                        deps: ['jquery','jqueryExtension']
+                        deps: ['bootstrap-button','bootstrap-modal','bootstrap-alert']
                     }
                 },
                 paths: {
@@ -163,8 +166,8 @@ module.exports = function(grunt) {
                     transparency:        'jam/transparency/lib/transparency',
                     bootstrap:           'jam/bootstrap/main',
                     'bootstrap-button':  '../application/jam/bootstrap/js/bootstrap-button',
-                    'bootstrap-modal':   '../application/lib/bootstrap-modal',
-                    'bootstrap-alert':  '../application/jam/bootstrap/js/bootstrap-alert',
+                    'bootstrap-alert':   '../application/jam/bootstrap/js/bootstrap-alert',
+                    'bootstrap-modal':   '../application/jam/bootstrap/js/bootstrap-modal',
                     keymaster:           'jam/keymaster/keymaster',
                     models:              'models',
                     collections:         'collections',
@@ -221,6 +224,26 @@ module.exports = function(grunt) {
         },
         mocha: {
             index: ['test-build/test.html']
+        },
+        remover: {
+            cleanRelease: [
+                'release/collections',
+                'release/features',
+                'release/jam',
+                'release/less',
+                'release/models',
+                'release/templates',
+                'release/tools',
+                'release/views',
+                'release/collections.js',
+                'release/features.js',
+                'release/build.txt',
+                'release/config.js',
+                'release/debug.js',
+                'release/models.js',
+                'release/tools.js',
+                'release/views.js'
+            ]
         }
     });
 
@@ -230,15 +253,17 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-bunyip');
     grunt.loadNpmTasks('grunt-mocha');
 
+    grunt.loadTasks('tasks/remover');
+
     grunt.registerTask('testbuild', 'clean regen requirejs:test');
     grunt.registerTask('test', 'testbuild mocha');
     grunt.registerTask('bunyiptest', 'testbuild bunyip:phantom clean');
 
-    grunt.registerTask('feature', 'init:feature init:regenerate-features init:regenerate-tests init:regenerate-less init:regenerate-templates');
+    grunt.registerTask('feature', 'init:feature init:regenerate-features init:regenerate-tests init:regenerate-less init:regenerate-templates regen');
+    grunt.registerTask('visibleFeature', 'init:feature init:regenerate-features init:regenerate-tests init:regenerate-less init:regenerate-templates regen');
     grunt.registerTask('regen', 'init:regenerate-features init:regenerate-models init:regenerate-collections init:regenerate-tests init:regenerate-tools init:regenerate-less init:regenerate-templates');
 
-
-    grunt.registerTask('release', 'regen init:regenerate-release requirejs:release recess:release regen');
+    grunt.registerTask('release', 'regen init:regenerate-release requirejs:release recess:release regen remover:cleanRelease');
 
     grunt.registerTask('default', 'regen lint bunyiptest release');
 

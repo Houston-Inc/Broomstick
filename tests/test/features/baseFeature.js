@@ -1,16 +1,19 @@
 define([
     'jquery',
     'transparency',
+    'features/router/router',
     'features/baseFeature',
     'features/featureContainer',
     'tools',
     'lib/testtools',
     'features'
-], function($, transparency, BaseFeature, FeatureContainer, tools, testtools, features) {
+], function($, transparency, Router, BaseFeature, FeatureContainer, tools, testtools, features) {
     "use strict";
 
     var self = this,
         baseFeature,
+        router,
+        originalURL,
         staticHandler = function() {
             return true;
         },
@@ -20,6 +23,7 @@ define([
 
     describe('BaseFeature', function() {
         beforeEach(function() {
+            router = new Router();
             baseFeature = new BaseFeature();
             baseFeature.features = new FeatureContainer();
         });
@@ -36,25 +40,28 @@ define([
         });
         describe('#initalizeGlobalEvents', function() {
             it('responds to subscribed "test" event', function(done) {
-                baseFeature.test = function(data) {
-                    expect(data).to.be.eql("response");
-                    done();
-                };
-                baseFeature.globalEvents = {
-                    'test' : 'test'
-                };
-                baseFeature.initializeSubscriptions();
-                baseFeature.publish('test','response');
+                var Feature = BaseFeature.extend({
+                    globalEvents : {
+                        'test' : 'test'
+                    },
 
+                    test : function(data) {
+                        expect(data).to.be.eql("response");
+                        done();
+                    }
+                });
+                
+                var feature = new Feature();
+                feature.publish('test','response');
             });
         });
 
         describe('#isRenderable', function() {
             it('returns false by default', function() {
-                expect(baseFeature.isRenderable()).to.not.be.ok();
+                expect(baseFeature.isRenderable()).to.be(false);
             });
         });
-
+        
         describe('#extend', function() {
             it('adds new attributes to prototype', function() {
                 var Feature = BaseFeature.extend({
@@ -141,12 +148,9 @@ define([
                 baseFeature.publish('arr:pörr');
             });
         });
-        describe('#initializeSubscriptions', function() {
+        describe('#initializeGlobalEvents', function() {
             it('initializes the event subscriptions', function(done) {
                 var Feat = BaseFeature.extend({
-                    initialize: function() {
-                        this.initializeSubscriptions();
-                    },
                     globalEvents: {
                         'namespace.event': 'eventHandler'
                     },
@@ -163,7 +167,6 @@ define([
                 var Feat = BaseFeature.extend({
                     name: 'Feat',
                     initialize: function() {
-                        this.initializeSubscriptions();
                         this.foo = 1;
                     },
                     globalEvents: {
@@ -186,7 +189,6 @@ define([
                 var ExtFeat = Feat.extend({
                     name: 'ExtFeat',
                     initialize: function() {
-                        this.initializeSubscriptions();
                         this.foo = 2;
                     }
                 });
@@ -196,10 +198,17 @@ define([
             });
         });
         describe('#featureActivated', function() {
+            beforeEach(function() {
+                originalURL = window.location.pathname + window.location.search;
+            });
+            afterEach(function(){
+                router.navigate(originalURL);
+            });
             it('sends router.navigate event', function(done) {
                 eventMachine.subscribe('router.navigate', function() {
                     done();
                 });
+
                 baseFeature.featureActivated({ feature: baseFeature, eventSource: {} });
             });
         });
