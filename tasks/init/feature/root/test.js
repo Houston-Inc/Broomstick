@@ -5,6 +5,7 @@ define([
     /*'tools',*/
     'lib/testtools'
 ], function($, transparency, {%= capitalizedName %}, /*tools,*/ testtools) {
+    "use strict";
 
     var self = this,
         {%= name %};
