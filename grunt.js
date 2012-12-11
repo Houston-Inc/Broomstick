@@ -46,12 +46,13 @@ module.exports = function(grunt) {
                 tasks: 'lint'
             },
             html: {
-                files: 'application/**/*.html',
+                files: ['application/templates/**/*.html',
+                        'application/features/**/*.html'],
                 tasks: 'regen'
             },
             less: {
-                files: 'application/less/**/*.less',
-                tasks: 'regen'
+                files: 'application/features/**/*.less',
+                tasks: 'init:regenerate-less'
             }
         },
         recess: {
