@@ -25,7 +25,7 @@ exports.template = function(grunt, init, done) {
 
     for (var key in files) {
         if(key === 'test.html') {
-            templateDefinition["tests/test.html"] = files[key];
+            templateDefinition["tests/index.html"] = files[key];
             continue;
         }
         else if(key === 'index.html') {
