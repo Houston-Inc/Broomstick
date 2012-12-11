@@ -41,8 +41,18 @@ module.exports = function(grunt) {
             }
         },
         watch: {
-            files: '<config:lint.all>',
-            tasks: 'lint test'
+            js: {
+                files: '<config:lint.all>',
+                tasks: 'lint'
+            },
+            html: {
+                files: 'application/**/*.html',
+                tasks: 'regen'
+            },
+            less: {
+                files: 'application/less/**/*.less',
+                tasks: 'regen'
+            }
         },
         recess: {
             release: {
