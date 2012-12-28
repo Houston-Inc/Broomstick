@@ -2,8 +2,16 @@ define([
     'jquery',
     'backbone',
     'features/VisibleFeature',
-    'features/featureContainer'
-], function($, Backbone, VisibleFeature, FeatureContainer, undefined) {
+    'features/featureContainer',
+    'features/section/section',
+    'features/samples/hello/hello'
+], function($,
+            Backbone,
+            VisibleFeature,
+            FeatureContainer,
+            Section,
+            HelloFeature,
+            undefined) {
     "use strict";
 
     // Sample Feature
@@ -29,13 +37,13 @@ define([
 
             self.loaded = $.Deferred();
 
-            self.when(self.templatesResolved(),function() {
-                var Section = self.getFeature('SectionFeature'),
-                    section = new Section("sample-section", self.element, true),
-                    HelloFeature = self.getFeature('HelloFeature');
-
-                console.log("hmm",HelloFeature);
-                var hello = new HelloFeature('hello', 'sample-section');
+            self.when(self.templatesResolved(), function() {
+                var section = new Section({
+                    id: 'sample-section',
+                    renderTo: self.element,
+                    noScroll: true
+                }),
+                    hello = new HelloFeature('hello', 'sample-section');
 
                 self.section = section;
                 self.registerFeature(section);

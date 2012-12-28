@@ -31,13 +31,16 @@ define([
             }
         ],
 
-        initialize: function(id, renderTo, noScroll) {
-            var self = this;
+        initialize: function(options) {
+            var id = options.id,
+                renderTo = options.renderTo,
+                noScroll = options.noScroll,
+                self = this;
 
             self.loaded = $.Deferred();
 
             if(!_.isString(id)) {
-                throw new Error(self.name + ": Constructor expects id (String)");
+                throw new Error(self.name + ': Constructor expects options.id (String) and not (' + id + ')');
             }
 
             self.id = id;

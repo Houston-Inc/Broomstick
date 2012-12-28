@@ -2,8 +2,22 @@ define([
     'jquery',
     'backbone',
     'features/VisibleFeature',
-    'features/featureContainer'
-], function($, Backbone, VisibleFeature, FeatureContainer, undefined) {
+    'features/featureContainer',
+    'features/section/section',
+    'features/accordion/accordion',
+    'features/samples/acco/acco',
+    'features/samples/acco2/acco2',
+    'features/samples/json/json'
+], function($,
+            Backbone,
+            VisibleFeature,
+            FeatureContainer,
+            Section,
+            Accordion,
+            Acco1,
+            Acco2,
+            JsonFeature,
+            undefined) {
     "use strict";
 
     // Sample 2 Feature
@@ -29,16 +43,15 @@ define([
             self.features = new FeatureContainer();
 
             self.loaded = $.Deferred();
-            
-            var Section = self.getFeature('SectionFeature'),
-                section = new Section("sample2-section", self.element, true),
-                Accordion = self.getFeature("AccordionFeature"),
-                accordion = new Accordion("analyzer-accordion", self.sectionId),
-                Acco1 = self.getFeature("AccoFeature"),
+
+            var section = new Section({
+                    id: 'sample2-section',
+                    renderTo: self.element,
+                    noScroll: true
+                }),
+                accordion = new Accordion('analyzer-accordion', self.sectionId),
                 acco1 = new Acco1("acco-content .accordion-inner"),
-                Acco2 = self.getFeature("Acco2Feature"),
                 acco2 = new Acco2("acco2-content .accordion-inner"),
-                JsonFeature = self.getFeature("JsonFeature"),
                 jsonFeature = new JsonFeature("json", self.sectionId);
 
             self.accordion = accordion;

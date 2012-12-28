@@ -16,7 +16,9 @@ define([
     describe('SectionFeature', function() {
         beforeEach(function(){
             testtools.beforeEach();
-            section = new Section("test-section");
+            section = new Section({
+                id: 'test-section'
+            });
         });
 
         afterEach(function(){
