@@ -64,7 +64,6 @@ define([
                     'ASelector': ASelector,
                     'BSelector': BSelector
                 };
-                accordion.setFeaturesProxy(features);
                 accordion.registerFeature(aSelector);
                 accordion.registerFeature(bSelector);
 

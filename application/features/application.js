@@ -3,8 +3,35 @@ define([
     'underscore',
     'backbone',
     'features/VisibleFeature',
-    'features/featureContainer'
-], function($, _, Backbone, VisibleFeature, FeatureContainer, undefined) {
+    'features/featureContainer',
+    'features/ajaxError',
+    'features/utils/toaster/toaster',
+    'features/windowEventDispatcher',
+    'features/viewportController',
+    'features/keymaster/keymaster',
+    'features/router/router',
+    'features/router/notFound/notFound',
+    'features/navigation/navigation',
+    'features/column/column',
+    'features/samples/sample/sample',
+    'features/samples/sample2/sample2'
+], function($,
+            _,
+            Backbone,
+            VisibleFeature,
+            FeatureContainer,
+            AjaxError,
+            Toaster,
+            WindowEventDispatcher,
+            ViewportController,
+            KeyMaster,
+            Router,
+            NotFound,
+            Navigation,
+            Column,
+            Sample,
+            Sample2,
+            undefined) {
     "use strict";
 
     // Application Feature
@@ -30,18 +57,18 @@ define([
 
                 self.$template = self.getTemplate(self.templateId, true);
 
-                self.registerFeature('AjaxErrorFeature');
-                self.registerFeature('ToasterFeature');
-                self.registerFeature('WindowEventDispatcherFeature');
-                self.registerFeature('ViewportControllerFeature');
-                self.registerFeature('KeyMasterFeature');
-                self.registerFeature('RouterFeature');
-                self.registerFeature('NotFoundFeature');
-                self.registerFeature('NavigationFeature');
+                self.registerFeature(new AjaxError);
+                self.registerFeature(new Toaster);
+                self.registerFeature(new WindowEventDispatcher);
+                self.registerFeature(new ViewportController);
+                self.registerFeature(new KeyMaster);
+                self.registerFeature(new Router);
+                self.registerFeature(new NotFound);
+                self.registerFeature(new Navigation);
 
-                column = self.registerFeature('ColumnFeature');
-                column.registerFeature('SampleFeature');
-                column.registerFeature('Sample2Feature');
+                column = self.registerFeature(new Column);
+                column.registerFeature(new Sample);
+                column.registerFeature(new Sample2);
 
                 self.when(self.features.isResolved(), function() {
                     if(self.getConfig('DEBUG')) {

@@ -74,6 +74,7 @@ require.config({
 require([
     'jquery',
     'underscore',
+    'underscore.string',
     'backbone',
     'transparency',
     'bootstrap',
@@ -81,14 +82,12 @@ require([
     'domReady',
     'console',
     'tools',
-    'models',
-    'collections',
-    'views',
-    'features',
-    'config'
+    'config',
+    'features/application'
 ], function(
     $,
     _,
+    _s,
     Backbone,
     transparency,
     bootstrap,
@@ -96,11 +95,8 @@ require([
     domReady,
     console,
     tools,
-    models,
-    collections,
-    views,
-    features,
-    config
+    config,
+    ApplicationFeature
 ) {
     console = window.console;
 
@@ -109,18 +105,16 @@ require([
     Backbone.noConflict();
     keymaster.noConflict();
 
+    // Transparency used as jQuery plugin with $('#id').render afterwards
+    transparency.register($);
+    // Mix in the underscore.string methods to underscore
+    _.mixin(_s.exports());
+
     domReady(function() {
         // Load templateStorage html
         tools.templateStorage.initialize();
 
-        // Work around this, by changing dependency chains
-        var BaseFeature = features.get('BaseFeature');
-        BaseFeature.prototype.setFeaturesProxy(features);
-
-        transparency.register($);
-
-        var ApplicationFeature = features.get('ApplicationFeature'),
-            application = new ApplicationFeature();
+        var application = new ApplicationFeature();
 
         application.when(application.isResolved(), function() {
             //console.log("-- Render start");

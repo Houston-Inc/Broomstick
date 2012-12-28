@@ -12,7 +12,7 @@ define('features', [
     "features/windowEventDispatcher",
     "features/accordion/accordion",
     "features/column/column",
-    "features/keymaster/KeyMaster",
+    "features/keymaster/keymaster",
     "features/navigation/navigation",
     "features/router/router",
     "features/router/notFound/notFound",

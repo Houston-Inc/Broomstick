@@ -50,7 +50,7 @@ define([
                         done();
                     }
                 });
-                
+
                 var feature = new Feature();
                 feature.publish('test','response');
             });
@@ -61,7 +61,7 @@ define([
                 expect(baseFeature.isRenderable()).to.be(false);
             });
         });
-        
+
         describe('#extend', function() {
             it('adds new attributes to prototype', function() {
                 var Feature = BaseFeature.extend({
@@ -88,12 +88,12 @@ define([
             });
             it('contains helper method accessing views', function(done) {
                 var baseFeature = BaseFeature.extend();
-                expect(baseFeature.prototype.getView).to.be.a("function");
+                expect(baseFeature.prototype.getView).to.be.a('function');
                 done();
             });
             it('contains helper method accessing config', function(done) {
                 var baseFeature = BaseFeature.extend();
-                expect(baseFeature.prototype.getConfig).to.be.a("function");
+                expect(baseFeature.prototype.getConfig).to.be.a('function');
                 done();
             });
         });
@@ -106,24 +106,15 @@ define([
                 expect(BaseFeature.prototype.isFeature({})).to.not.be.ok();
             });
         });
-        describe('#setFeaturesProxy', function() {
-            it('sets the featuresProxy to the whole prototype', function() {
-                var featuresProxy = testtools.createFeaturesProxyObject();
-                BaseFeature.prototype.setFeaturesProxy(featuresProxy);
-                expect(BaseFeature.prototype.featuresProxy).to.be.ok();
-            });
-            it('feature proxy survives over extend', function() {
-                var featuresProxy = testtools.createFeaturesProxyObject();
-                BaseFeature.setFeaturesProxy(featuresProxy);
-                var NewFeature = BaseFeature.extend({});
-                expect(NewFeature.featuresProxy).to.be.ok();
-            });
-        });
         describe('#registerFeature', function() {
             it('returns sampleFeature', function() {
                 var sampleFeature;
-                BaseFeature.prototype.setFeaturesProxy(features);
-                sampleFeature = baseFeature.registerFeature("SampleFeature");
+                sampleFeature = baseFeature.registerFeature(new (BaseFeature.extend({
+                    name: 'SampleFeature',
+                    initialize: function() {
+                        this.loaded = $.Deferred();
+                    }
+                })));
                 expect(sampleFeature).to.be.ok();
             });
         });

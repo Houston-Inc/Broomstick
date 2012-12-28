@@ -50,7 +50,6 @@ define([
                 var featurePrototypes = testtools.createFeaturePrototypeList(),
                     features = testtools.createFeatures(featurePrototypes),
                     featuresProxy = testtools.createFeaturesProxyObject(featurePrototypes);
-                module.setFeaturesProxy(featuresProxy);
                 var called = 1;
                 module.subscribe('module.addedFeature', function(feature){
                     if(called === 3) {

@@ -17,7 +17,6 @@ define([
         beforeEach(function(){
             feature = new VisibleFeature();
             feature.features = new FeatureContainer();
-            feature.setFeaturesProxy(testtools.createFeaturesProxyObject());
         });
 
         afterEach(function(){

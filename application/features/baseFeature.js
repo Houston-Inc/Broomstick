@@ -90,13 +90,6 @@ define([
             return views.get(name);
         },
 
-        getFeature: function getFeature(name) {
-            if(config.DEBUG) {
-                console.log("getFeature:", name);
-            }
-            return this.featuresProxy.get(name);
-        },
-
         getTemplate: function getTemplate(selector, nounwrap) {
             return tools.templateStorage.get(selector, nounwrap);
         },
@@ -147,26 +140,24 @@ define([
         },
 
         registerFeature: function registerFeature(feature) {
-            var self = this, Feature, instance, featureName;
+            var instance, featureName;
 
-            if(!self.features) {
-                throw new Error( "FeaturesContainer not set for " + self.name );
+            if(!this.features) {
+                throw new Error('FeaturesContainer not set for ' + self.name );
             }
 
-            if(self.isFeature(feature)) {
-                instance = feature;
-                featureName = feature.name;
-            } else {
-                Feature = self.getFeature(feature);
-                instance = new Feature();
-                featureName = feature;
+            if(!this.isFeature(feature)) {
+                throw new Error(feature + ' (' + typeof feature + ') is not a Feature' + (feature.name ? ' - ' + feature.name : ''));
             }
 
-            if(self.getConfig('DEBUG')) {
-                console.log(self.name, "registering", featureName);
+            instance = feature;
+            featureName = feature.name;
+
+            if(this.getConfig('DEBUG')) {
+                console.log(this.name, "registering", featureName);
             }
 
-            self.features.add(instance);
+            this.features.add(instance);
 
             return instance;
         },
@@ -234,12 +225,6 @@ define([
             }
         }
     };
-
-    function setFeaturesProxy(featuresProxy) {
-        BaseFeature.featuresProxy = BaseFeature.prototype.featuresProxy = featuresProxy;
-    }
-
-    BaseFeature.setFeaturesProxy = BaseFeature.prototype.setFeaturesProxy = setFeaturesProxy;
 
     BaseFeature.extend = extend;
 
