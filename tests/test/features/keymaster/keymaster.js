@@ -1,5 +1,5 @@
 define([
-    'features/keymaster/KeyMaster',
+    'features/keymaster/keymaster',
     'tools',
     'test-assets',
     'lib/testtools'

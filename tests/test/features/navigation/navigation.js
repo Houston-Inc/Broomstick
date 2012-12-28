@@ -10,8 +10,19 @@ define([
     'lib/testtools',
     'test-assets',
     'features/samples/sample/sample',
-    'features/keymaster/KeyMaster'
-], function($, _, transparency, Navigation, BaseFeature, Section, Hello, tools, testtools, testAssets, Sample, KeyMaster) {
+    'features/keymaster/keymaster'
+], function($,
+            _,
+            transparency,
+            Navigation,
+            BaseFeature,
+            Section,
+            Hello,
+            tools,
+            testtools,
+            testAssets,
+            Sample,
+            KeyMaster) {
     "use strict";
 
     var self = this,
@@ -29,14 +40,6 @@ define([
             $('#testdata').append($nav);
             keys = new KeyMaster();
             navigation = new Navigation();
-            BaseFeature.prototype.setFeaturesProxy({
-                'SampleFeature': Sample,
-                'SectionFeature': Section,
-                'HelloFeature': Hello,
-                get: function(feature) {
-                    return BaseFeature.prototype.featuresProxy[feature];
-                }
-            });
         });
 
         afterEach(function() {
