@@ -11,19 +11,24 @@ require.config({
     },
     packages: [
         {
-            "name": "bootstrap-button",
-            "location": "jam/bootstrap/js",
-            "main": "./bootstrap-button"
+            'name': 'bootstrap-button',
+            'location': 'jam/bootstrap/js',
+            'main': './bootstrap-button'
         },
         {
-            "name": "bootstrap-modal",
-            "location": "jam/bootstrap/js",
-            "main": "./bootstrap-modal"
+            'name': 'bootstrap-modal',
+            'location': 'jam/bootstrap/js',
+            'main': './bootstrap-modal'
         },
         {
-            "name": "bootstrap-alert",
-            "location": "jam/bootstrap/js",
-            "main": "./bootstrap-alert"
+            'name': 'bootstrap-alert',
+            'location': 'jam/bootstrap/js',
+            'main': './bootstrap-alert'
+        },
+        {
+            'name': 'console',
+            'location': 'lib',
+            'main': './console'
         }
     ],
     shim: {
@@ -74,6 +79,7 @@ require([
     'bootstrap',
     'keymaster',
     'domReady',
+    'console',
     'tools',
     'models',
     'collections',
@@ -88,6 +94,7 @@ require([
     bootstrap,
     keymaster,
     domReady,
+    console,
     tools,
     models,
     collections,
@@ -95,6 +102,8 @@ require([
     features,
     config
 ) {
+    console = window.console;
+
     $.noConflict();
     _.noConflict();
     Backbone.noConflict();
