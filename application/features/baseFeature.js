@@ -2,11 +2,20 @@ define([
     'jquery',
     'underscore',
     'tools',
+    'features/featureContainer',
     'models',
     'collections',
     'views',
     'config'
-], function($, _, tools, models, collections, views, config, undefined) {
+], function($,
+            _,
+            tools,
+            FeatureContainer,
+            models,
+            collections,
+            views,
+            config,
+            undefined) {
     "use strict";
 
     /* Stolen from Backbone's extend */
@@ -199,6 +208,22 @@ define([
 
         setFeaturesRenderable: function setFeaturesRenderable(featuresRenderableBoolean) {
             this._featuresRenderable = featuresRenderableBoolean;
+        },
+
+        renderFeatures: function(features) {
+            var self = this;
+            features = features || this.features;
+            features.each(function(feature) {
+                if(feature.isRenderable()) {
+                    if(self.getConfig('DEBUG')) {
+                        console.log("   -- Rendering ", feature.name, feature.features);
+                    }
+                    feature.render();
+                    if(feature.features instanceof FeatureContainer && feature.isFeaturesRenderable()) {
+                        self.renderFeatures(feature.features);
+                    }
+                }
+            });
         },
 
         join: function join() {

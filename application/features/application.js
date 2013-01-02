@@ -92,21 +92,6 @@ define([
             }
         },
 
-        renderFeatures: function(features) {
-            var self = this;
-            features.each(function(feature) {
-                if(feature.isRenderable()) {
-                    if(self.getConfig('DEBUG')) {
-                        console.log("   -- Rendering ", feature.name, feature.features);
-                    }
-                    feature.render();
-                    if(feature.features instanceof FeatureContainer && feature.isFeaturesRenderable()) {
-                        self.renderFeatures(feature.features);
-                    }
-                }
-            });
-        },
-
         featureResolved: function(feature) {
             var self = this,
                 count = 0;
