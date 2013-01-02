@@ -41,7 +41,7 @@ define([
 
         createIEStyles: function() {
             var ieTag, templateTag, self = this;
-            if($.browser.msie) {
+            if($('html').hasClass('lt-ie8')) {
                 templateTag = $("#templates");
                 ieTag = '<link type="text/css" rel="stylesheet/less" href="application/less/ie.less" />';
                 $(ieTag).insertBefore(templateTag);
@@ -49,7 +49,7 @@ define([
         },
 
         forceIE7Redraw: function() {
-            if($.browser.msie && parseInt($.browser.version, 10) === 7) {
+            if($('html').hasClass('lt-ie8')) {
                 $(window).trigger('resize');
             }
         },
@@ -59,7 +59,7 @@ define([
         },
 
         getViewportHeight: function() {
-            if($.browser.msie && parseInt($.browser.version, 10) === 7) {
+            if($('html').hasClass('lt-ie8')) {
                 return this.viewportHeight - 20;
             }
             return this.viewportHeight;

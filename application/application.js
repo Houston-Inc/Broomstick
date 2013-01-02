@@ -98,6 +98,8 @@ require([
     config,
     ApplicationFeature
 ) {
+    // Remove no-js
+    $('html').removeClass('no-js');
     console = window.console;
 
     $.noConflict();
