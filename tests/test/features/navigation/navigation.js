@@ -3,26 +3,22 @@ define([
     'underscore',
     'transparency',
     'features/navigation/navigation',
-    'features/baseFeature',
+    'features/visibleFeature',
     'features/section/section',
-    'features/samples/hello/hello',
+    'features/keymaster/keymaster',
     'tools',
     'lib/testtools',
-    'test-assets',
-    'features/samples/sample/sample',
-    'features/keymaster/keymaster'
+    'test-assets'
 ], function($,
             _,
             transparency,
             Navigation,
-            BaseFeature,
+            VisibleFeature,
             Section,
-            Hello,
+            KeyMaster,
             tools,
             testtools,
-            testAssets,
-            Sample,
-            KeyMaster) {
+            testAssets) {
     "use strict";
 
     var self = this,
@@ -57,6 +53,13 @@ define([
                 expect(navigation.registerFeature(navigation)).to.be(true);
             });
             it('registers new Feature on moduleInitialized event', function() {
+                var Sample = VisibleFeature.extend({
+                    uiName: 'SampleFeature',
+                    initialize: function() {
+                        this.loaded = $.Deferred();
+                        this.publish('moduleInitialized', this);
+                    }
+                });
                 new Sample();
                 expect(navigation.features.getAll().length).to.be(1);
             });

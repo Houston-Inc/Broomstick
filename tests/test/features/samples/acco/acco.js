@@ -14,7 +14,9 @@ define([
     describe('AccoFeature', function() {
         beforeEach(function(){
             testtools.beforeEach();
-            acco = new Acco("testdata");
+            acco = new Acco({
+                renderToId: 'testdata'
+            });
         });
 
         afterEach(function(){

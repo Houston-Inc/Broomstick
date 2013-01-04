@@ -1,3 +1,4 @@
+/*globals navigator*/
 define([
     'jquery',
     'backbone',
@@ -15,19 +16,21 @@ define([
         name: 'HelloFeature',
         element: '#hello',
 
-        initialize: function(id, sectionId) {
-            var self = this;
+        initialize: function(options) {
+            var self = this,
+                id = options.renderToId,
+                sectionId = options.sectionId;
 
-            self.loaded = $.Deferred();
+            this.loaded = $.Deferred();
 
             if(!_.isString(id)) {
-                throw new Error(self.name + ": Constructor expects id (String)");
+                throw new Error(this.name + ": Constructor expects options.renderToId (String)");
             }
 
-            self.id = id;
-            self.sectionId = sectionId;
+            this.id = id;
+            this.sectionId = sectionId;
 
-            self.when(self.templatesResolved(),function() {
+            this.when(this.templatesResolved(), function() {
                 self.$template = self.getTemplate(self.element);
                 self.resolve(true);
             });
@@ -45,7 +48,7 @@ define([
 
             // Basic transparency usage
             var data = {
-                name: $.browser.version
+                name: navigator.userAgent
             };
 
             self.$el.render(data);

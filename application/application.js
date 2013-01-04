@@ -119,7 +119,9 @@ require([
         var application = new ApplicationFeature();
 
         application.when(application.isResolved(), function() {
-            //console.log("-- Render start");
+            if(config.DEBUG) {
+                console.log("-- Render start");
+            }
             application.render();
             application.publish('application.ready');
         });

@@ -15,7 +15,9 @@ define([
     describe('LoadingFeature', function() {
         beforeEach(function(){
             testtools.beforeEach();
-            loading = new Loading("JEEJEELOADING!");
+            loading = new Loading({
+                message: "JEEJEELOADING!"
+            });
         });
 
         afterEach(function(){

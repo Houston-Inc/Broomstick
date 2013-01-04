@@ -11,7 +11,7 @@ define("specs", [
     "test/features/windowEventDispatcher",
     "test/features/accordion/accordion",
     "test/features/column/column",
-    "test/features/keymaster/KeyMaster",
+    "test/features/keymaster/keymaster",
     "test/features/navigation/navigation",
     "test/features/router/router",
     "test/features/router/notFound/notFound",

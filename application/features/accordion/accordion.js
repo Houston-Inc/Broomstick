@@ -21,8 +21,10 @@ define([
             'click .accordion-buttons .last' : 'calculate'
         },
 
-        initialize: function(id, sectionId) {
-            var self = this;
+        initialize: function(options) {
+            var self = this,
+                id = options.renderToId,
+                sectionId = options.sectionId;
 
             if(!_.isString(id)) {
                 throw new Error(self.name + ": Constructor expects id (String)");

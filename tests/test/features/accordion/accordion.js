@@ -17,7 +17,9 @@ define([
 
         beforeEach(function(){
             testtools.beforeEach();
-            accordion = new Accordion("testAccordion");
+            accordion = new Accordion({
+                renderToId: 'testAccordion'
+            });
         });
 
         afterEach(function(){

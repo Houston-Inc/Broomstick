@@ -16,14 +16,15 @@ define([
         uiName: 'Acco 2',
         element: '#acco2',
 
-        initialize: function(renderToID) {
-            var self = this;
+        initialize: function(options) {
+            var self = this,
+                renderToId = options.renderToId;
 
-            if(!_.isString(renderToID)) {
-                throw new Error(self.name + ": Constructor expects id (String)");
+            if(!_.isString(renderToId)) {
+                throw new Error(self.name + ": Constructor expects options.renderToId (String)");
             }
 
-            self.id = renderToID;
+            self.id = renderToId;
 
             self.loaded = $.Deferred();
 

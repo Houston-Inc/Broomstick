@@ -18,14 +18,16 @@ define([
             'collection.datasLoaded': 'asyncRender'
         },
 
-        initialize: function(renderToID, sectionId) {
-            var self = this;
+        initialize: function(options) {
+            var self = this,
+                renderToId = options.renderToId,
+                sectionId = options.sectionId;
 
-            if(!_.isString(renderToID)) {
+            if(!_.isString(renderToId)) {
                 throw new Error(self.name + ": Constructor expects id (String)");
             }
 
-            self.id = renderToID;
+            self.id = renderToId;
             self.sectionId = sectionId;
 
             self.loaded = $.Deferred();

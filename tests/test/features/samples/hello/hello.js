@@ -14,7 +14,9 @@ define([
     describe('HelloFeature', function() {
         beforeEach(function(){
             testtools.beforeEach();
-            hello = new Hello("testdata");
+            hello = new Hello({
+                renderToId: 'testdata'
+            });
         });
 
         afterEach(function(){

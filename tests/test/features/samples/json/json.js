@@ -14,7 +14,9 @@ define([
     describe('JsonFeature', function() {
         beforeEach(function(){
             testtools.beforeEach();
-            json = new Json("testdata");
+            json = new Json({
+                renderToId: 'testdata'
+            });
         });
 
         afterEach(function(){

@@ -13,10 +13,10 @@ define([
         element: '#loading',
         defaultMessage: 'Ladataan...',
 
-        initialize: function(message) {
+        initialize: function(options) {
             var self = this;
 
-            self.message = message ? message : self.defaultMessage;
+            self.message = options ? options.message : self.defaultMessage;
 
             self.loaded = $.Deferred();
 

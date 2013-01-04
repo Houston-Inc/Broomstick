@@ -1,10 +1,78 @@
-/*global require: true*/
+/*global require*/
 "use strict";
-
+var APPLICATION = '../application',
+    JAM = APPLICATION + '/jam';
 // Configure RequireJS
 require.config({
     baseUrl:'.',
     urlArgs: "v="+(new Date()).getTime(),
+    packages: [
+        {
+            name:     'mocha',
+            location: 'lib',
+            main:     './mocha'
+        },
+        {
+            name:     'expect',
+            location: 'lib/assertion',
+            main:     './expect'
+        },
+        {
+            name:     'mocha-yeti-adaptor',
+            location: 'lib',
+            main:     './mocha-yeti-adaptor'
+        },
+        {
+            name:     'jquery',
+            location: JAM + '/jquery/dist',
+            main:     './jquery'
+        },
+        {
+            name:     'underscore',
+            location: JAM + '/underscore',
+            main:     './underscore'
+        },
+        {
+            name:     'underscore.string',
+            location: JAM + '/underscore.string/lib',
+            main:     './underscore.string'
+        },
+        {
+            name:     'backbone',
+            location: JAM + '/backbone',
+            main:     './backbone'
+        },
+        {
+            name:     'transparency',
+            location: JAM + '/transparency/lib',
+            main:     './transparency'
+        },
+        {
+            name:     'keymaster',
+            location: JAM + '/keymaster',
+            main:     './keymaster'
+        },
+        {
+            name:     'bootstrap-button',
+            location: JAM + '/bootstrap/js',
+            main:     './bootstrap-button'
+        },
+        {
+            name:     'bootstrap-modal',
+            location: JAM + '/bootstrap/js',
+            main:     './bootstrap-modal'
+        },
+        {
+            name:     'bootstrap-alert',
+            location: JAM + '/bootstrap/js',
+            main:     './bootstrap-alert'
+        },
+        {
+            name:     'console',
+            location: APPLICATION + '/lib',
+            main:     './console'
+        }
+    ],
     shim: {
         'mocha': {
             'exports': 'mocha'
@@ -14,6 +82,9 @@ require.config({
         },
         'mocha_yeti': {
             exports: 'BUNYIP'
+        },
+        'underscore': {
+            exports: '_'
         },
         'backbone': {
             deps: ['underscore', 'jquery'],
@@ -36,27 +107,14 @@ require.config({
         }
     },
     paths: {
-        mocha_yeti:             'lib/mocha-yeti-adaptor',
-        specs:                  'specs',
-        mocha:                  'lib/mocha',
-        expect:                 'lib/assertion/expect',
-        jquery:                 '../application/jam/jquery/jquery',
-        bootstrap:              'bootstrap',
-        'bootstrap-alert':      '../application/jam/bootstrap/js/bootstrap-alert',
-        'bootstrap-button':     '../application/jam/bootstrap/js/bootstrap-button',
-        'bootstrap-modal':      '../application/jam/bootstrap/js/bootstrap-modal',
-        underscore:             '../application/jam/underscore/underscore',
-        'underscore.string':    '../application/jam/underscore.string/lib/underscore.string',
-        backbone:               '../application/jam/backbone/backbone',
-        transparency:           '../application/jam/transparency/lib/transparency',
-        keymaster:              '../application/jam/keymaster/keymaster',
-        models:                 '../application/models',
-        collections:            '../application/collections',
-        templates:              '../application/templates',
-        views:                  '../application/views',
-        features:               '../application/features',
-        tools:                  '../application/tools',
-        config:                 'config'
+        specs:       'specs',
+        config:      'config',
+        models:      APPLICATION + '/models',
+        collections: APPLICATION + '/collections',
+        templates:   APPLICATION + '/templates',
+        views:       APPLICATION + '/views',
+        features:    APPLICATION + '/features',
+        tools:       APPLICATION + '/tools'
     }
 });
 
@@ -64,13 +122,13 @@ require.config({
 require(['require',
          'expect',
          'mocha',
-         'mocha_yeti'],
+         'mocha-yeti-adaptor'],
         function(require) {
             var self = this || window;
             var globals = ['jQuery*'];
             self.mocha.setup('bdd');
             // Require base tests before starting
-            require(['specs'], function(){
+            require(['specs'], function() {
                 var runner = self.mocha
                         .globals(globals)
                         .run();

@@ -16,18 +16,19 @@ define([
         uiName: 'Acco 1',
         element: '#acco',
 
-        initialize: function(renderToID) {
-            var self = this;
+        initialize: function(options) {
+            var self = this,
+                renderToId = options.renderToId;
 
-            if(!_.isString(renderToID)) {
-                throw new Error(self.name + ": Constructor expects id (String)");
+            if(!_.isString(renderToId)) {
+                throw new Error(this.name + ": Constructor expects id (String)");
             }
 
-            self.id = renderToID;
+            this.id = renderToId;
 
-            self.loaded = $.Deferred();
+            this.loaded = $.Deferred();
 
-            self.when(self.templatesResolved(),function() {
+            this.when(this.templatesResolved(), function() {
                 self.$template = self.getTemplate(self.element);
                 self.resolve(true);
             });
