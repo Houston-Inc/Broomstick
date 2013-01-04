@@ -1,6 +1,4 @@
 (function(window) {
-    "use strict";
-
     define([
         'jquery',
         'backbone',
@@ -9,6 +7,7 @@
         'features/featureContainer',
         'bootstrap-modal'
     ], function($, Backbone, _, VisibleFeature, FeatureContainer, btModal, undefined) {
+        "use strict";
         // NotFound Feature
         // ------------------------------
 
