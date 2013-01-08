@@ -255,6 +255,51 @@ module.exports = function(grunt) {
                 'release/tools.js',
                 'release/views.js'
             ]
+        },
+        config: {
+            shared: {
+                AJAXCACHE: false,
+                TEMPLATE_STORAGE_PATH: 'templates/all.html',
+                PATHS: {
+                    DATA: '/data.json'
+                }
+            },
+            dev: {
+                shared: '<config:config.shared>',
+                options: {
+                    EVENTS: true,
+                    SET_IMMEDIATE: true,
+                    DEBUG: true,
+                    HOST: 'http://127.0.0.1:8080'
+                }
+            },
+            ci: {
+                shared: '<config:config.shared>',
+                options: {
+                    EVENTS: true,
+                    SET_IMMEDIATE: true,
+                    DEBUG: true,
+                    HOST: 'http://nnn.nnn.nnn.nnn:xxxx'
+                }
+            },
+            qa: {
+                shared: '<config:config.shared>',
+                options: {
+                    EVENTS: false,
+                    SET_IMMEDIATE: false,
+                    DEBUG: false,
+                    HOST: 'http://nnn.nnn.nnn.nnn:xxxx'
+                }
+            },
+            prod: {
+                shared: '<config:config.shared>',
+                options: {
+                    EVENTS: false,
+                    SET_IMMEDIATE: false,
+                    DEBUG: false,
+                    HOST: 'http://nnn.nnn.nnn.nnn:xxxx'
+                }
+            }
         }
     });
 
@@ -265,6 +310,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-mocha');
 
     grunt.loadTasks('tasks/remover');
+    grunt.loadTasks('tasks/config');
 
     grunt.registerTask('testbuild', 'clean regen requirejs:test');
     grunt.registerTask('test', 'testbuild mocha');

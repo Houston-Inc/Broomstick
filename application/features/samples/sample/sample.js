@@ -43,7 +43,10 @@ define([
                     renderTo: self.element,
                     noScroll: true
                 }),
-                    hello = new HelloFeature('hello', 'sample-section');
+                    hello = new HelloFeature({
+                        renderToId: 'hello',
+                        sectionId: 'sample-section'
+                    });
 
                 self.section = section;
                 self.registerFeature(section);

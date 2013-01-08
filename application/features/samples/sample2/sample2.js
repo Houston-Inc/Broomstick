@@ -49,10 +49,16 @@ define([
                     renderTo: self.element,
                     noScroll: true
                 }),
-                accordion = new Accordion('analyzer-accordion', self.sectionId),
-                acco1 = new Acco1("acco-content .accordion-inner"),
-                acco2 = new Acco2("acco2-content .accordion-inner"),
-                jsonFeature = new JsonFeature("json", self.sectionId);
+                accordion = new Accordion({
+                    renderToId: 'analyzer-accordion',
+                    sectionId: self.sectionId
+                }),
+                acco1 = new Acco1({renderToId: 'acco-content .accordion-inner'}),
+                acco2 = new Acco2({renderToId: 'acco2-content .accordion-inner'}),
+                jsonFeature = new JsonFeature({
+                    renderToId: 'json',
+                    sectionId: self.sectionId
+                });
 
             self.accordion = accordion;
             self.registerFeature(section);

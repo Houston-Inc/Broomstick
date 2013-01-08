@@ -9,7 +9,7 @@ define("config", function() {
     var config = {
         DEBUG: true,
         AJAXCACHE: false,
-        HOST: CI,
+        HOST: LOCALHOST,
         SET_IMMEDIATE: false,
         TEMPLATE_STORAGE_PATH: '../application/templates/all.html',
         PATHS: {
