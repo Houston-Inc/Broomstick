@@ -39,10 +39,11 @@ define([
 
             self.when(self.templatesResolved(), function() {
                 var section = new Section({
-                    id: 'sample-section',
-                    renderTo: self.element,
-                    noScroll: true
-                }),
+                        id: 'sample-section',
+                        renderTo: self.element,
+                        parentFeature: this,
+                        noScroll: true
+                    }),
                     hello = new HelloFeature({
                         renderToId: 'hello',
                         sectionId: 'sample-section'

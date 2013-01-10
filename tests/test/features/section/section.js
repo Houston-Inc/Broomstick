@@ -17,7 +17,10 @@ define([
         beforeEach(function(){
             testtools.beforeEach();
             section = new Section({
-                id: 'test-section'
+                id: 'test-section',
+                renderTo: '',
+                noScroll: true,
+                parentFeature: {}
             });
         });
 

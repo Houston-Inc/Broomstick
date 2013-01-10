@@ -1,0 +1,38 @@
+#row-navigation {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 1000;
+
+    ul.row-nav {
+        position: absolute;
+        top: 50%;
+        right: 1em;
+        list-style: none;
+
+        li {
+            padding: 2px;
+
+            &.active {
+                .ball {
+                    #translucent .background(blue,0.5);
+                    &:hover {
+                        #translucent .background(blue,0.75);
+                    }
+                }
+            }
+
+            .ball {
+                #translucent .background(#ddd,0.5);
+                .border-radius(50%);
+                opacity: 50%;
+                width: 1em;
+                height: 1em; 
+                &:hover {
+                    #translucent .background(#ddd,0.75);
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
