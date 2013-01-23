@@ -47,6 +47,7 @@ define([
             var section = new Section({
                     id: 'sample2-section',
                     renderTo: self.element,
+                    parentFeature: this,
                     noScroll: true
                 }),
                 accordion = new Accordion({

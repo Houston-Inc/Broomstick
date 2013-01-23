@@ -14,6 +14,7 @@ define('features', [
     "features/column/column",
     "features/keymaster/keymaster",
     "features/navigation/navigation",
+    "features/navigation/row/rowNavigation",
     "features/router/router",
     "features/router/notFound/notFound",
     "features/samples/acco/acco",

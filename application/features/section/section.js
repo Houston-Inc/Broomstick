@@ -17,7 +17,9 @@ define([
 
         globalEvents: {
             'window.resize': 'resize',
-            'section.next': 'next'
+            'section.next': 'next',
+            'navigation.sectionClicked': 'sectionClicked',
+            'navigation.activeFeatureSet': 'setActiveFeature'
         },
 
         keyEvents: [
@@ -35,6 +37,7 @@ define([
             var id = options.id,
                 renderTo = options.renderTo,
                 noScroll = options.noScroll,
+                parentFeature = options.parentFeature,
                 self = this;
 
             self.loaded = $.Deferred();
@@ -42,10 +45,14 @@ define([
             if(!_.isString(id)) {
                 throw new Error(self.name + ': Constructor expects options.id (String) and not (' + id + ')');
             }
+            if(!_.isObject(parentFeature)) {
+                throw new Error(self.name + ': Constructor expects options.parentFeature (Object) and not (' + parentFeature + ')');
+            }
 
             self.id = id;
             self.renderTo = renderTo;
             self.noScroll = noScroll;
+            self.parentFeature = parentFeature;
             self.currentSection = 1;
             self.features = new FeatureContainer();
 
@@ -137,24 +144,49 @@ define([
             }
         },
 
+        sectionClicked: function(event) {
+            var self = this,
+                sectionId = event.sectionId;
+
+            if(self.id === sectionId && event.sectionIndex <= self.stackCount && event.sectionIndex > 0) {
+                self.currentSection = event.sectionIndex;
+                self.$viewport.removeClass(self.getSectionClasses());
+                self.$viewport.addClass("section" + self.currentSection);
+            }
+        },
+
         up: function() {
             var self = this;
-            if(self.currentSection > 1) {
-                self.currentSection -= 1;
-                self.$viewport.removeClass(self.getSectionClasses());
+            if(self.activeFeature === self.parentFeature) {
                 if(self.currentSection > 1) {
-                    self.$viewport.addClass("section" + self.currentSection);
+                    self.currentSection -= 1;
+                    self.$viewport.removeClass(self.getSectionClasses());
+                    if(self.currentSection > 1) {
+                        self.$viewport.addClass("section" + self.currentSection);
+                    }
+                    self.publish('navigation.sectionUpdated', {
+                        sectionIndex: self.currentSection
+                    });
                 }
             }
         },
 
         down: function() {
             var self = this;
-            if(self.currentSection < self.stackCount) {
-                self.currentSection += 1;
-                self.$viewport.removeClass(self.getSectionClasses());
-                self.$viewport.addClass("section" + self.currentSection);
+            if(self.activeFeature === self.parentFeature) {
+                if(self.currentSection < self.stackCount) {
+                    self.currentSection += 1;
+                    self.$viewport.removeClass(self.getSectionClasses());
+                    self.$viewport.addClass("section" + self.currentSection);
+                    self.publish('navigation.sectionUpdated', {
+                        sectionIndex: self.currentSection
+                    });
+                }
             }
+        },
+
+        setActiveFeature: function(activeFeature) {
+            this.activeFeature = activeFeature.feature;
         }
 
     });

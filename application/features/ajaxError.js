@@ -40,6 +40,7 @@ define([
 
         delegateError: function(xhr, status, error) {
             var self = this;
+            console.log("fasfsfsafsa");
             self.publish("ajaxError", {
                 data: {
                     xhr: xhr,

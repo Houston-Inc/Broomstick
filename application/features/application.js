@@ -12,6 +12,7 @@ define([
     'features/router/router',
     'features/router/notFound/notFound',
     'features/navigation/navigation',
+    'features/navigation/row/rowNavigation',
     'features/column/column',
     'features/samples/sample/sample',
     'features/samples/sample2/sample2'
@@ -28,6 +29,7 @@ define([
             Router,
             NotFound,
             Navigation,
+            RowNavigation,
             Column,
             Sample,
             Sample2,
@@ -57,18 +59,19 @@ define([
 
                 self.$template = self.getTemplate(self.templateId, true);
 
-                self.registerFeature(new AjaxError);
-                self.registerFeature(new Toaster);
-                self.registerFeature(new WindowEventDispatcher);
-                self.registerFeature(new ViewportController);
-                self.registerFeature(new KeyMaster);
-                self.registerFeature(new Router);
-                self.registerFeature(new NotFound);
-                self.registerFeature(new Navigation);
+                self.registerFeature(new AjaxError());
+                self.registerFeature(new Toaster());
+                self.registerFeature(new WindowEventDispatcher());
+                self.registerFeature(new ViewportController());
+                self.registerFeature(new KeyMaster());
+                self.registerFeature(new Router());
+                self.registerFeature(new NotFound());
+                self.registerFeature(new Navigation());
+                self.registerFeature(new RowNavigation());
 
-                column = self.registerFeature(new Column);
-                column.registerFeature(new Sample);
-                column.registerFeature(new Sample2);
+                column = self.registerFeature(new Column());
+                column.registerFeature(new Sample());
+                column.registerFeature(new Sample2());
 
                 self.when(self.features.isResolved(), function() {
                     if(self.getConfig('DEBUG')) {

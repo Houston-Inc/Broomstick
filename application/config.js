@@ -10,7 +10,7 @@ define("config", function() {
         "PATHS": {
             "DATA": "/data.json"
         },
-        "EVENTS": true,
+        "EVENTS": false,
         "SET_IMMEDIATE": true,
         "DEBUG": true,
         "HOST": "http://127.0.0.1:8080"

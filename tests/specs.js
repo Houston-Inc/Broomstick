@@ -13,6 +13,7 @@ define("specs", [
     "test/features/column/column",
     "test/features/keymaster/keymaster",
     "test/features/navigation/navigation",
+    "test/features/navigation/row/rowNavigation",
     "test/features/router/router",
     "test/features/router/notFound/notFound",
     "test/features/samples/acco/acco",

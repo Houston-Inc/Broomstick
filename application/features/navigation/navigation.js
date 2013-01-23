@@ -128,19 +128,20 @@ define([
             }
             if(number === 0) {
                 number = featureLength;
-                feature = self.features[number-1];
+                feature = self.features.getAt(number-1);
             }
             if(self.activeFeature !== number) {
                 self.activeFeature = number;
-                self.publish('navigation.activeFeatureSet', {
-                    column: self.activeFeature,
-                    eventSource: eventSource,
-                    feature: feature
-                });
             }
+            self.publish('navigation.activeFeatureSet', {
+                column: self.activeFeature,
+                eventSource: eventSource,
+                feature: feature
+            });
             setTimeout(function() {
                $('#loading').css({'z-index': 'auto', background: 'none'});
             },600);
+
             return self.activeFeature;
         },
 
