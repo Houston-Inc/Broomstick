@@ -59,10 +59,13 @@ define([
 
         // Prevents default key movement events, especially effective in FF
         keydown: function(event) {
-            var key = event.keyCode;
-            // Arrow keys
-            if(key === 37 || key === 39 || key === 38 || key === 40) {
-                event.preventDefault();
+            var key = event.keyCode,
+                target = event.target;
+            //Arrow keys and space
+            if(target === window) {
+                if(key === 37 || key === 39 || key === 38 || key === 40 || key === 32) {
+                    event.preventDefault();
+                }
             }
         }
 
