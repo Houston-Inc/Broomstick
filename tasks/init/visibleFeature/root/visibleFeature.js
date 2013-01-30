@@ -15,11 +15,15 @@ define([
         name: '{%= capitalizedName %}Feature',
         uiName: '{%= capitalizedName %}',
         element: '#{%= dashNotatedName %}',
+
         globalEvents: {
-            'eventName': 'eventHandler'
+            'navigation.activeFeatureSet': 'activated'
+        },
+        routes: {
+            '{%= capitalizedName.toLowerCase() %}': 'render'
         },
 
-        initialize: function() {
+        initialize: function initialize() {
             var self = this;
 
             self.loaded = $.Deferred();
@@ -35,62 +39,19 @@ define([
 
         },
 
-        eventHandler: function(eventData) {
-			// doMagicOnEventTriggered
-        },
+        render: function render() {
+            this.$template.render(data, directives);
 
-        // Rendering
-
-        build: function(data) {
-            var self = this;
-
-            self.features.each(function(feature) {
-                data.push({
-                   dataObject: feature.uiName,
-                   id: feature.id
-                });
-            });
-        },
-
-        asyncRender: function() {
-            var self = this;
-
-            if(self.isRendered()) {
-                self.render();
-            }
-        },
-
-        render: function() {
-            var self = this,
-                data = [],
-                directives = {
-                    dataObject: {
-                        'id': function() {
-                            return this.id;
-                        }
-                    }
-                };
-
-            self.build(data);
-
-            self.$template.render(data, directives);
-
-            if(!self.isRendered()) {
-                self.setElement(self.element);
-                self.$el.append(self.$template);
-                self.setRendered(true);
+            if(!this.isRendered()) {
+                this.setElement(this.element);
+                this.$el.append(this.$template);
+                this.setRendered(true);
             }
 
         },
 
-        render: function() {
-            var self = this;
-
-            if(!self.isRendered()) {
-                self.setElement(self.element);
-                self.$el.append(self.$template);
-                self.setRendered(true);
-            }
+        activated: function activated(featureActivated) {
+            this.featureActivated.call(this, featureActivated);
         }
 
     });

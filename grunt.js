@@ -317,7 +317,7 @@ module.exports = function(grunt) {
     grunt.registerTask('bunyiptest', 'testbuild bunyip:phantom clean');
 
     grunt.registerTask('feature', 'init:feature init:regenerate-features init:regenerate-tests init:regenerate-less init:regenerate-templates regen');
-    grunt.registerTask('visibleFeature', 'init:feature init:regenerate-features init:regenerate-tests init:regenerate-less init:regenerate-templates regen');
+    grunt.registerTask('visibleFeature', 'init:visibleFeature init:regenerate-features init:regenerate-tests init:regenerate-less init:regenerate-templates regen');
     grunt.registerTask('regen', 'config:dev init:regenerate-features init:regenerate-models init:regenerate-collections init:regenerate-tests init:regenerate-tools init:regenerate-less init:regenerate-templates');
 
     grunt.registerTask('release', 'regen init:regenerate-release requirejs:release recess:release regen remover:cleanRelease');
