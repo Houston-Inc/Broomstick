@@ -33,13 +33,17 @@ define([
             self.features.on('add', self.asyncRender, self);
 
             self.when(self.templatesResolved(),function() {
-              self.$template = self.getTemplate(self.element);
-              self.resolve(true);
+                self.$template = self.getTemplate(self.element);
+                self.resolve(true);
             });
+
+            self.publish('router.registerRoutes', self);
+            self.publish('moduleInitialized', self);
 
         },
 
         render: function render() {
+
             this.$template.render(data, directives);
 
             if(!this.isRendered()) {
